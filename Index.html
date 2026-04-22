@@ -1,0 +1,1308 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Alpha Korner – Logiciels Sur Mesure | Strasbourg</title>
+<meta name="description" content="Alpha Korner conçoit des logiciels sur mesure, applications web et solutions digitales pour entreprises à Strasbourg. Résultats rapides, interface soignée.">
+<meta property="og:title" content="Alpha Korner – Logiciels Sur Mesure | Strasbourg">
+<meta property="og:description" content="Alpha Korner conçoit des logiciels sur mesure, applications web et solutions digitales pour entreprises à Strasbourg.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ─── Reset & Base ─── */
+*,::before,::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-scale-x:1;--tw-scale-y:1;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246/0.5);--tw-shadow:0 0 #0000;border:0 solid #e5e7eb;box-sizing:border-box}
+html{line-height:1.5;-webkit-text-size-adjust:100%;font-family:'Inter',ui-sans-serif,system-ui,sans-serif;-webkit-tap-highlight-color:transparent}
+body{margin:0;line-height:inherit;overflow-x:hidden}
+h1,h2,h3,h4,p{margin:0}
+a{color:inherit;text-decoration:inherit}
+button{font-family:inherit;font-size:100%;font-weight:inherit;line-height:inherit;color:inherit;margin:0;padding:0;background:transparent;border:none;cursor:pointer}
+img,video{max-width:100%;height:auto;display:block}
+[hidden]{display:none}
+
+/* ─── Keyframe Animations ─── */
+@keyframes content-fade-in{0%{opacity:0}100%{opacity:1}}
+@keyframes fade-scale-in{0%{opacity:0;transform:translate(50%) scale(.95)}100%{opacity:1;transform:translate(50%) scale(1)}}
+@keyframes spin{to{transform:rotate(1turn)}}
+@keyframes ak-shimmer{0%{transform:translateX(-100%);opacity:0}10%{opacity:1}50%{transform:translateX(100%);opacity:0.3}100%{transform:translateX(200%);opacity:0}}
+@keyframes tiltAnimation{0%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}100%{transform:rotate(-3deg)}}
+@keyframes widgetAppear{0%{transform:scale(0);opacity:0}60%{transform:scale(1.05)}100%{transform:scale(1);opacity:1}}
+@keyframes fadeInFromTop{0%{opacity:0;transform:translateY(-70%)}100%{opacity:1;transform:translateY(0)}}
+@keyframes fadeInFromBottom{0%{opacity:0;transform:translateY(70%)}100%{opacity:1;transform:translateY(0)}}
+@keyframes fadeInFromLeft{0%{opacity:0;transform:translateX(-60%)}100%{opacity:1;transform:translateX(0)}}
+@keyframes fadeInFromRight{0%{opacity:0;transform:translateX(60%)}100%{opacity:1;transform:translateX(0)}}
+@keyframes arrows{0%{opacity:0;transform:translateY(8px)}50%{opacity:1}100%{opacity:0;transform:translateY(-8px)}}
+@keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.08)}100%{transform:scale(1)}}
+@keyframes floatCard{0%,100%{transform:translateY(0px) rotate(-1deg)}50%{transform:translateY(-10px) rotate(1deg)}}
+@keyframes floatCard2{0%,100%{transform:translateY(0px) rotate(1deg)}50%{transform:translateY(-8px) rotate(-1deg)}}
+@keyframes fadeInUp{0%{opacity:0;transform:translateY(30px)}100%{opacity:1;transform:translateY(0)}}
+@keyframes glowPulse{0%,100%{box-shadow:0 0 4px 0 rgb(52,209,108),0 0 20px rgba(52,209,108,0.08)}50%{box-shadow:0 0 8px 0 rgb(52,209,108),0 0 40px rgba(52,209,108,0.2)}}
+@keyframes dotBlink{0%,80%,100%{opacity:0}40%{opacity:1}}
+@keyframes slideInNav{0%{transform:translateY(-100%);opacity:0}100%{transform:translateY(0);opacity:1}}
+@keyframes counterUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes dropdownIn{0%{opacity:0;transform:translateY(-6px)}100%{opacity:1;transform:translateY(0)}}
+
+/* ─── Layout Utilities ─── */
+.flex{display:flex}.inline-flex{display:inline-flex}.grid{display:grid}.block{display:block}
+.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}
+.flex-col{flex-direction:column}.items-center{align-items:center}.justify-center{justify-content:center}.justify-between{justify-content:space-between}
+.w-full{width:100%}.h-full{height:100%}.mx-auto{margin-left:auto;margin-right:auto}
+.text-center{text-align:center}.whitespace-nowrap{white-space:nowrap}.overflow-hidden{overflow:hidden}
+.shrink-0{flex-shrink:0}.z-50{z-index:50}.z-10{z-index:10}.z-0{z-index:0}
+.inset-0{inset:0}.top-0{top:0}.left-0{left:0}.right-0{right:0}.bottom-0{bottom:0}
+
+/* ─── Color Variables ─── */
+:root{
+  --green:#34D16C;
+  --green-light:rgba(52,209,108,0.15);
+  --dark:#1D1D1E;
+  --gray:#777;
+  --border:#E5E5EA;
+  --bg-page:rgb(248,248,248);
+  --shadow-nav:0px 3px 6px 0px rgba(10,11,36,0.02),0px 11px 11px 0px rgba(10,11,36,0.02),0px 25px 15px 0px rgba(10,11,36,0.01);
+}
+
+/* ─── Navigation ─── */
+.nav-wrapper{
+  position:fixed;top:0;left:0;right:0;z-index:50;
+  display:flex;justify-content:center;align-items:center;
+  animation:slideInNav .4s ease-out;
+}
+.nav-inner{
+  display:flex;flex-direction:column;width:100%;max-width:100%;
+  background:white;padding:14px 20px;
+  border-bottom:1px solid var(--border);
+  box-shadow:var(--shadow-nav);
+}
+.nav-row{display:flex;justify-content:space-between;align-items:center}
+.nav-logo{
+  font-size:22px;font-weight:700;color:var(--dark);
+  letter-spacing:-0.8px;line-height:1;
+}
+.nav-logo span{color:var(--green)}
+
+/* ─── Nav Menu Links ─── */
+.nav-links{
+  display:flex;align-items:center;gap:4px;
+  flex:1;justify-content:center;
+}
+.nav-link{
+  font-size:14px;font-weight:500;color:var(--dark);
+  padding:7px 12px;border-radius:10px;
+  transition:background .15s,color .15s;
+  letter-spacing:-0.3px;white-space:nowrap;
+  position:relative;
+}
+.nav-link:hover{background:var(--bg-page);color:var(--dark)}
+.nav-link.has-dropdown{display:flex;align-items:center;gap:4px}
+.nav-link.has-dropdown svg{transition:transform .2s}
+.nav-link.has-dropdown:hover svg{transform:rotate(180deg)}
+
+/* Dropdown */
+.nav-dropdown-wrap{position:relative}
+.nav-dropdown{
+  position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%);
+  background:white;border:1px solid var(--border);border-radius:16px;
+  padding:8px;min-width:220px;
+  box-shadow:0 8px 30px rgba(0,0,0,0.08),0 2px 8px rgba(0,0,0,0.04);
+  display:none;z-index:100;
+  animation:dropdownIn .15s ease-out both;
+}
+.nav-dropdown-wrap:hover .nav-dropdown,
+.nav-dropdown-wrap:focus-within .nav-dropdown{display:block}
+.nav-dropdown-item{
+  display:flex;align-items:center;gap:10px;
+  padding:10px 12px;border-radius:10px;
+  font-size:14px;font-weight:500;color:var(--dark);
+  transition:background .12s;cursor:pointer;
+  letter-spacing:-0.3px;
+}
+.nav-dropdown-item:hover{background:var(--bg-page)}
+.nav-dropdown-item-icon{
+  width:32px;height:32px;border-radius:8px;
+  background:rgba(52,209,108,0.1);flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+}
+.nav-dropdown-item-icon svg{width:16px;height:16px;stroke:var(--green);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.nav-dropdown-item-text{display:flex;flex-direction:column;gap:1px}
+.nav-dropdown-item-label{font-size:13px;font-weight:600;color:var(--dark)}
+.nav-dropdown-item-sub{font-size:11px;color:var(--gray);letter-spacing:-0.1px}
+
+/* ─── Nav Right Actions ─── */
+.nav-actions{display:flex;align-items:center;gap:8px;flex-shrink:0}
+
+/* Tel quick button */
+.nav-tel{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--bg-page);border:1px solid var(--border);
+  color:var(--dark);border-radius:11px;padding:7px 13px;
+  font-size:13px;font-weight:600;letter-spacing:-0.3px;
+  transition:background .2s,border-color .2s;
+}
+.nav-tel:hover{background:white;border-color:#ccc}
+.nav-tel svg{flex-shrink:0}
+
+.nav-cta{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--green);color:white;
+  border-radius:12px;padding:8px 16px;
+  font-size:13px;font-weight:600;letter-spacing:-0.3px;
+  transition:transform .2s ease,box-shadow .2s ease;
+  box-shadow:0 0 0 rgba(52,209,108,0);
+}
+.nav-cta:hover{transform:scale(1.04);box-shadow:0 4px 16px rgba(52,209,108,0.35)}
+.nav-cta:active{transform:scale(0.97)}
+
+/* Mobile: hide nav-links on small screens, show hamburger or just collapse */
+@media(max-width:640px){
+  .nav-links{display:none}
+  .nav-tel .tel-label{display:none}
+}
+@media(min-width:641px) and (max-width:800px){
+  .nav-links{gap:0}
+  .nav-link{padding:7px 8px;font-size:13px}
+}
+
+/* ─── Hero Section ─── */
+.page-wrap{
+  display:flex;flex-direction:column;align-items:center;width:100%;max-width:100vw;overflow-x:hidden;
+  padding-bottom:0;
+  background-image:linear-gradient(rgb(255,255,255) 0px,rgb(255,255,255) 500px,rgb(248,248,248) 760px);
+  background-color:var(--bg-page);
+}
+.hero-section{
+  max-width:100%;z-index:10;margin-top:130px;margin-bottom:60px;padding:0 4px;
+}
+.hero-inner{display:flex;flex-direction:column;align-items:center;gap:36px;color:var(--dark)}
+.hero-badge{
+  background:white;border:0.7px solid var(--border);
+  box-shadow:rgba(10,11,36,0.08) 0px 3px 6px 0px;
+  display:inline-flex;align-items:center;gap:11px;
+  border-radius:13px;padding:8px 18px;cursor:pointer;
+  transition:transform .2s ease,box-shadow .2s ease;
+  animation:fadeInUp .5s ease-out both;
+}
+.hero-badge:hover{transform:translateY(-2px);box-shadow:rgba(10,11,36,0.12) 0px 6px 16px 0px}
+.hero-badge span{font-size:12px;font-weight:500;color:var(--dark);letter-spacing:-0.48px;white-space:nowrap;line-height:1}
+.hero-badge .badge-dot{
+  width:8px;height:8px;border-radius:50%;background:var(--green);
+  animation:pulse 2s ease-in-out infinite;
+}
+.hero-texts{display:flex;flex-direction:column;align-items:center;gap:24px;animation:fadeInUp .6s ease-out .1s both}
+.hero-h1{
+  font-size:32px;width:90%;font-weight:700;text-align:center;
+  line-height:1.2;letter-spacing:-1.26px;color:var(--dark);
+}
+.hero-sub{
+  font-size:18px;width:90%;color:var(--gray);line-height:1.2;
+  text-align:center;font-weight:400;letter-spacing:-0.6px;
+}
+.hero-btn{
+  display:flex;align-items:center;cursor:pointer;
+  border-radius:18px;border:1px solid #D6FFCE;
+  padding:7px 6px 7px 17px;
+  background:rgb(255,255,255);
+  box-shadow:rgb(52,209,108) 0px 0px 4px 0px,rgba(52,209,108,0.12) 0px 28px 56px 0px;
+  column-gap:12px;
+  transition:transform .2s ease-out,box-shadow .2s ease;
+  animation:glowPulse 3s ease-in-out infinite, fadeInUp .7s ease-out .2s both;
+  user-select:none;
+}
+.hero-btn:hover{transform:scale(1.03)}
+.hero-btn:active{transform:scale(0.98)}
+.hero-btn-label{font-size:17px;font-weight:600;letter-spacing:-0.6px;line-height:1.2}
+.hero-btn-badge{
+  border-radius:13px;color:white;padding:6px 12px;
+  display:flex;gap:4px;align-items:center;
+  box-shadow:rgb(48,223,111) 0px 0px 3.5px 0px;
+  background-color:var(--green);
+}
+.hero-btn-badge span{font-size:13px;font-weight:600}
+
+/* ─── Feature Pills ─── */
+.pills-section{max-width:100%;margin-top:30px;width:100%;padding:0 4px}
+.pills-bg{
+  position:relative;width:100%;max-width:1200px;overflow:hidden;
+  border-radius:20px;margin:0 auto;
+  background-image:linear-gradient(rgb(233,233,233) 0%,rgb(242,242,242) 45%,rgb(255,255,255) 72%);
+}
+.pills-content{display:flex;width:100%;flex-direction:column;align-items:center;gap:8px;padding:12px;padding-top:16px}
+.pills-row{display:flex;width:100%;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px}
+.pill{
+  display:inline-flex;flex-shrink:0;align-items:center;gap:10px;
+  border-radius:11px;border:1px solid #E8E8E8;background:white;
+  padding:10px 14px;text-align:left;
+  transition:box-shadow .2s,transform .15s;
+  cursor:pointer;user-select:none;
+}
+.pill:hover{box-shadow:0 2px 12px rgba(0,0,0,0.1);transform:translateY(-1px)}
+.pill:active{transform:scale(0.98)}
+.pill.active{box-shadow:0 2px 10px rgba(0,0,0,0.06)}
+.pill-dot-wrap{
+  display:inline-flex;width:18px;height:18px;flex-shrink:0;
+  align-items:center;justify-content:center;border-radius:50%;
+}
+.pill-dot-wrap.active{background:rgba(52,209,108,0.15)}
+.pill-dot-wrap.inactive{background:#F0F0F0}
+.pill-dot{width:8px;height:8px;border-radius:50%}
+.pill-dot.active{background:var(--green)}
+.pill-dot.inactive{background:#C0C0C0}
+.pill-label{white-space:nowrap;font-size:15px;font-weight:500;line-height:1.25;letter-spacing:-0.35px;color:var(--dark)}
+
+/* ─── Demo / Mockup Area ─── */
+.demo-area{
+  position:relative;margin-top:4px;width:100%;padding:12px 12px 48px;
+  background:rgb(237,237,237);border-radius:0 0 20px 20px;
+}
+.demo-card{
+  overflow:hidden;border-radius:16px;border:5px solid #F5F5F5;background:white;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  min-height:260px;padding:30px;gap:20px;
+}
+.demo-icon{
+  width:64px;height:64px;border-radius:16px;
+  background:linear-gradient(135deg,var(--green) 0%,#1aad55 100%);
+  display:flex;align-items:center;justify-content:center;
+  animation:floatCard 4s ease-in-out infinite;
+  box-shadow:0 8px 24px rgba(52,209,108,0.35);
+}
+.demo-icon svg{width:32px;height:32px;fill:white}
+.demo-card-title{font-size:20px;font-weight:700;color:var(--dark);letter-spacing:-0.6px;text-align:center}
+.demo-card-sub{font-size:14px;color:var(--gray);text-align:center;letter-spacing:-0.3px;line-height:1.4}
+.demo-cards-row{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;width:100%}
+.demo-mini-card{
+  background:white;border-radius:14px;padding:16px;flex:1;min-width:140px;max-width:200px;
+  box-shadow:0 2px 12px rgba(0,0,0,0.06);
+  animation:floatCard2 5s ease-in-out infinite;
+}
+.demo-mini-card:nth-child(2){animation-delay:.8s}
+.demo-mini-card:nth-child(3){animation-delay:1.6s}
+.demo-mini-icon{
+  width:36px;height:36px;border-radius:10px;
+  background:rgba(52,209,108,0.12);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:10px;
+}
+.demo-mini-icon svg{width:18px;height:18px;stroke:var(--green);fill:none;stroke-width:2}
+.demo-mini-label{font-size:11px;font-weight:500;color:var(--gray);margin-bottom:4px}
+.demo-mini-value{font-size:20px;font-weight:700;color:var(--dark);letter-spacing:-0.8px}
+
+/* ─── Trusted / Social Proof ─── */
+.trust-section{
+  display:flex;flex-direction:column;align-items:center;
+  gap:4px;margin-top:50px;width:100%;
+}
+.trust-label{font-size:15px;font-weight:400;color:var(--gray);text-align:center}
+.trust-label strong{color:var(--dark);font-weight:600}
+.trust-avatars{
+  display:flex;align-items:center;justify-content:center;gap:-4px;margin-top:8px;
+}
+.trust-avatar{
+  width:32px;height:32px;border-radius:50%;
+  background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);
+  border:2px solid white;margin-left:-6px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:700;color:white;
+}
+.trust-avatar:first-child{margin-left:0}
+
+/* ─── Stats Section ─── */
+.stats-section{
+  width:100%;background:white;margin-top:70px;
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  padding:40px 20px;
+}
+.stats-inner{
+  max-width:900px;margin:0 auto;
+  display:grid;grid-template-columns:1fr 1fr;gap:30px;
+}
+.stat-item{display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center}
+.stat-value{
+  font-size:36px;font-weight:700;color:var(--dark);letter-spacing:-1.5px;
+  animation:content-fade-in .8s ease-out both;
+}
+.stat-unit{color:var(--green)}
+.stat-label{font-size:13px;color:var(--gray);letter-spacing:-0.3px;line-height:1.3}
+.stats-headline{
+  text-align:center;font-size:15px;color:var(--gray);
+  max-width:360px;margin:0 auto 30px;letter-spacing:-0.3px;line-height:1.4;
+}
+
+/* ─── Features Blocks ─── */
+.features-section{
+  width:100%;max-width:100%;margin-top:75px;padding:0 16px;
+  display:flex;flex-direction:column;gap:60px;
+}
+.feature-block{
+  display:flex;flex-direction:column;gap:24px;
+  animation:fadeInUp .6s ease-out both;
+}
+.feature-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(52,209,108,0.1);border-radius:20px;
+  padding:4px 12px;align-self:flex-start;
+}
+.feature-eyebrow span{font-size:12px;font-weight:600;color:var(--green);letter-spacing:0.5px;text-transform:uppercase}
+.feature-h2{
+  font-size:26px;font-weight:700;color:var(--dark);
+  letter-spacing:-0.9px;line-height:1.2;
+}
+.feature-h2 em{font-style:normal;color:var(--green)}
+.feature-desc{font-size:15px;color:var(--gray);line-height:1.5;letter-spacing:-0.3px}
+.feature-link{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:14px;font-weight:600;color:var(--dark);letter-spacing:-0.4px;
+  border-bottom:1.5px solid var(--dark);padding-bottom:1px;
+  align-self:flex-start;transition:color .2s,border-color .2s;
+}
+.feature-link:hover{color:var(--green);border-color:var(--green)}
+.feature-link svg{transition:transform .2s}
+.feature-link:hover svg{transform:translateX(3px)}
+
+/* ─── Feature Cards ─── */
+.feat-cards{display:flex;flex-direction:column;gap:12px}
+.feat-card{
+  background:white;border:1px solid var(--border);border-radius:16px;
+  padding:20px;display:flex;align-items:flex-start;gap:14px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.04);
+  transition:transform .2s,box-shadow .2s;
+}
+.feat-card:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,0.08)}
+.feat-card-icon{
+  width:40px;height:40px;border-radius:11px;flex-shrink:0;
+  background:rgba(52,209,108,0.12);
+  display:flex;align-items:center;justify-content:center;
+}
+.feat-card-icon svg{width:20px;height:20px;stroke:var(--green);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.feat-card-body{display:flex;flex-direction:column;gap:4px}
+.feat-card-title{font-size:15px;font-weight:600;color:var(--dark);letter-spacing:-0.4px}
+.feat-card-desc{font-size:13px;color:var(--gray);line-height:1.4;letter-spacing:-0.2px}
+
+/* ─── Pricing Section ─── */
+.pricing-section{
+  width:100%;margin-top:75px;padding:0 16px;
+  scroll-margin-top:80px;
+}
+.pricing-header{text-align:center;margin-bottom:32px}
+.pricing-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(52,209,108,0.1);border-radius:20px;
+  padding:4px 12px;margin-bottom:12px;
+}
+.pricing-eyebrow span{font-size:12px;font-weight:600;color:var(--green);letter-spacing:0.5px;text-transform:uppercase}
+.pricing-title{font-size:26px;font-weight:700;color:var(--dark);letter-spacing:-0.9px;line-height:1.2;margin-bottom:8px}
+.pricing-sub{font-size:15px;color:var(--gray);letter-spacing:-0.3px}
+
+.pricing-cards{display:flex;flex-direction:column;gap:16px}
+.pricing-card{
+  background:white;border:1px solid var(--border);border-radius:20px;
+  padding:24px;position:relative;overflow:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,0.04);
+  transition:transform .2s,box-shadow .2s;
+}
+.pricing-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,0.08)}
+.pricing-card.featured{
+  background:var(--dark);border-color:var(--dark);
+  color:white;
+}
+.pricing-card.featured::after{
+  content:'';position:absolute;width:200%;height:200%;
+  background:radial-gradient(ellipse at 50% 0%,rgba(52,209,108,0.15) 0%,transparent 60%);
+  top:-50%;left:-50%;pointer-events:none;
+}
+.pricing-badge{
+  display:inline-flex;align-items:center;gap:4px;
+  background:var(--green);color:white;
+  border-radius:8px;padding:3px 10px;
+  font-size:11px;font-weight:700;letter-spacing:0.3px;
+  margin-bottom:16px;
+}
+.pricing-plan{font-size:13px;font-weight:600;color:var(--gray);letter-spacing:0.5px;text-transform:uppercase;margin-bottom:6px}
+.pricing-card.featured .pricing-plan{color:rgba(255,255,255,0.5)}
+.pricing-price{
+  font-size:40px;font-weight:700;color:var(--dark);letter-spacing:-1.5px;
+  line-height:1;margin-bottom:4px;
+  display:flex;align-items:baseline;gap:4px;
+}
+.pricing-card.featured .pricing-price{color:white}
+.pricing-price-currency{font-size:22px;font-weight:600;align-self:flex-start;margin-top:6px}
+.pricing-price-period{font-size:14px;font-weight:400;color:var(--gray);margin-left:2px}
+.pricing-card.featured .pricing-price-period{color:rgba(255,255,255,0.5)}
+.pricing-desc{font-size:14px;color:var(--gray);letter-spacing:-0.3px;margin:12px 0 20px;line-height:1.4}
+.pricing-card.featured .pricing-desc{color:rgba(255,255,255,0.6)}
+.pricing-divider{border:none;border-top:1px solid var(--border);margin:0 0 20px}
+.pricing-card.featured .pricing-divider{border-color:rgba(255,255,255,0.1)}
+.pricing-features{display:flex;flex-direction:column;gap:10px;margin-bottom:24px}
+.pricing-feature{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--dark);letter-spacing:-0.2px}
+.pricing-card.featured .pricing-feature{color:rgba(255,255,255,0.85)}
+.pricing-feature-check{
+  width:20px;height:20px;border-radius:50%;flex-shrink:0;
+  background:rgba(52,209,108,0.12);
+  display:flex;align-items:center;justify-content:center;
+}
+.pricing-card.featured .pricing-feature-check{background:rgba(52,209,108,0.2)}
+.pricing-feature-check svg{width:11px;height:11px;stroke:var(--green);fill:none;stroke-width:2.5}
+.pricing-card-btn{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  border-radius:13px;padding:13px 20px;
+  font-size:14px;font-weight:600;letter-spacing:-0.3px;
+  width:100%;transition:transform .15s,box-shadow .15s;
+  background:var(--bg-page);color:var(--dark);border:1px solid var(--border);
+}
+.pricing-card.featured .pricing-card-btn{
+  background:var(--green);color:white;border:none;
+  box-shadow:0 4px 16px rgba(52,209,108,0.4);
+}
+.pricing-card-btn:hover{transform:scale(1.02)}
+.pricing-card-btn:active{transform:scale(0.98)}
+
+/* ─── Testimonial ─── */
+.testimonial-section{
+  width:100%;background:white;margin-top:70px;padding:40px 20px;
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+}
+.testimonial-label{font-size:11px;font-weight:600;color:var(--gray);letter-spacing:1px;text-transform:uppercase;text-align:center;margin-bottom:24px}
+.testimonial-card{
+  background:var(--bg-page);border:1px solid var(--border);border-radius:20px;
+  padding:24px;max-width:500px;margin:0 auto;
+  position:relative;overflow:hidden;
+}
+.testimonial-card::before{
+  content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.6),transparent);
+  animation:ak-shimmer 4s ease-in-out infinite;
+}
+.testimonial-stars{display:flex;gap:3px;margin-bottom:12px;justify-content:center}
+.testimonial-stars span{font-size:18px}
+.testimonial-quote{
+  font-size:15px;color:var(--dark);line-height:1.5;letter-spacing:-0.3px;
+  text-align:center;font-style:italic;
+}
+.testimonial-author{
+  display:flex;align-items:center;gap:10px;margin-top:18px;justify-content:center;
+}
+.testimonial-avatar{
+  width:36px;height:36px;border-radius:50%;
+  background:linear-gradient(135deg,#f093fb 0%,#f5576c 100%);
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:700;color:white;
+}
+.testimonial-name{font-size:13px;font-weight:600;color:var(--dark)}
+.testimonial-role{font-size:12px;color:var(--gray)}
+
+/* ─── CTA Section ─── */
+.cta-section{
+  width:100%;margin-top:75px;padding:0 16px 30px;
+  display:flex;flex-direction:column;gap:30px;
+  scroll-margin-top:80px;
+}
+.cta-block{
+  background:var(--dark);border-radius:24px;padding:32px 24px;
+  display:flex;flex-direction:column;gap:20px;align-items:center;
+  text-align:center;position:relative;overflow:hidden;
+}
+.cta-block::after{
+  content:'';position:absolute;width:200%;height:200%;
+  background:radial-gradient(ellipse at 50% 0%,rgba(52,209,108,0.12) 0%,transparent 60%);
+  top:-50%;left:-50%;pointer-events:none;
+}
+.cta-block-title{
+  font-size:26px;font-weight:700;color:white;
+  letter-spacing:-0.9px;line-height:1.2;
+}
+.cta-block-sub{font-size:14px;color:rgba(255,255,255,0.6);letter-spacing:-0.3px;line-height:1.4}
+.cta-block-actions{display:flex;flex-direction:column;gap:10px;align-items:center;width:100%}
+.cta-block-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--green);color:white;border-radius:14px;
+  padding:12px 24px;font-size:15px;font-weight:600;letter-spacing:-0.4px;
+  box-shadow:0 0 20px rgba(52,209,108,0.4);
+  transition:transform .2s,box-shadow .2s;
+  animation:glowPulse 3s ease-in-out infinite;
+}
+.cta-block-btn:hover{transform:scale(1.04)}
+.cta-block-btn:active{transform:scale(0.97)}
+/* Tel CTA inside dark block */
+.cta-tel-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(255,255,255,0.08);color:white;border-radius:14px;
+  padding:12px 24px;font-size:15px;font-weight:600;letter-spacing:-0.4px;
+  border:1px solid rgba(255,255,255,0.15);
+  transition:background .2s,transform .2s;
+}
+.cta-tel-btn:hover{background:rgba(255,255,255,0.14);transform:scale(1.02)}
+
+/* ─── Contact / Info Cards ─── */
+.info-cards{display:flex;flex-direction:column;gap:12px}
+.info-card{
+  background:white;border:1px solid var(--border);border-radius:16px;
+  padding:18px;display:flex;align-items:center;gap:14px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.04);
+  transition:transform .2s,box-shadow .2s;
+}
+.info-card:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,0.08)}
+.info-card a{color:var(--dark);font-size:15px;font-weight:500;letter-spacing:-0.3px}
+.info-card a:hover{color:var(--green)}
+.info-card-icon{
+  width:40px;height:40px;border-radius:11px;flex-shrink:0;
+  background:rgba(52,209,108,0.1);
+  display:flex;align-items:center;justify-content:center;
+}
+.info-card-icon svg{width:20px;height:20px;stroke:var(--green);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.info-card-label{font-size:11px;font-weight:600;color:var(--gray);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:2px}
+
+/* Tel info card highlight */
+.info-card.tel-highlight{
+  border-color:rgba(52,209,108,0.3);
+  background:linear-gradient(135deg,white 0%,rgba(52,209,108,0.03) 100%);
+}
+.info-card.tel-highlight a{
+  font-size:18px;font-weight:700;color:var(--dark);letter-spacing:-0.5px;
+}
+.info-card.tel-highlight a:hover{color:var(--green)}
+
+/* ─── FAQ ─── */
+.faq-section{width:100%;margin-top:75px;padding:0 16px}
+.faq-title{font-size:26px;font-weight:700;color:var(--dark);letter-spacing:-0.9px;margin-bottom:8px}
+.faq-sub{font-size:15px;color:var(--gray);margin-bottom:28px;letter-spacing:-0.3px}
+.faq-item{border-bottom:1px solid var(--border);animation:fadeInUp .5s ease-out both}
+.faq-q{display:flex;justify-content:space-between;align-items:center;padding:16px 0;cursor:pointer;gap:10px}
+.faq-q-text{font-size:15px;font-weight:500;color:var(--dark);letter-spacing:-0.3px;line-height:1.3}
+.faq-arrow{width:24px;height:24px;border-radius:50%;background:#F0F0F0;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .25s,background .2s}
+.faq-arrow svg{width:14px;height:14px;stroke:var(--dark);stroke-width:2;fill:none;transition:transform .25s}
+.faq-item.open .faq-arrow{background:var(--green-light)}
+.faq-item.open .faq-arrow svg{transform:rotate(180deg);stroke:var(--green)}
+.faq-a{font-size:14px;color:var(--gray);line-height:1.5;letter-spacing:-0.2px;padding-bottom:16px;display:none}
+.faq-item.open .faq-a{display:block}
+
+/* ─── Final CTA Banner ─── */
+.final-cta{
+  width:100%;margin-top:75px;padding:50px 20px;
+  background:white;text-align:center;
+  border-top:1px solid var(--border);
+}
+.final-cta-title{font-size:26px;font-weight:700;color:var(--dark);letter-spacing:-0.9px;margin-bottom:10px;line-height:1.2}
+.final-cta-sub{font-size:15px;color:var(--gray);margin-bottom:28px;letter-spacing:-0.3px;line-height:1.4}
+.final-cta-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--dark);color:white;border-radius:14px;
+  padding:14px 28px;font-size:16px;font-weight:600;letter-spacing:-0.5px;
+  transition:transform .2s,background .2s;
+  box-shadow:0 4px 16px rgba(0,0,0,0.15);
+}
+.final-cta-btn:hover{transform:scale(1.04);background:var(--green)}
+.final-cta-btn:active{transform:scale(0.97)}
+
+/* ─── Footer ─── */
+.footer{
+  width:100%;background:var(--bg-page);
+  border-top:1px solid var(--border);
+  padding:40px 20px;
+  display:flex;flex-direction:column;gap:24px;
+}
+.footer-brand{font-size:18px;font-weight:700;color:var(--dark);letter-spacing:-0.6px}
+.footer-brand span{color:var(--green)}
+.footer-links{display:flex;flex-wrap:wrap;gap:16px}
+.footer-links a{font-size:13px;color:var(--gray);letter-spacing:-0.2px;transition:color .2s}
+.footer-links a:hover{color:var(--dark)}
+.footer-copy{font-size:12px;color:var(--gray);letter-spacing:-0.2px}
+.footer-contact{display:flex;flex-direction:column;gap:6px}
+.footer-contact a{font-size:13px;color:var(--gray);transition:color .2s}
+.footer-contact a:hover{color:var(--green)}
+
+/* ─── Floating Action Button ─── */
+.fab{
+  position:fixed;bottom:24px;right:20px;z-index:2147483001;
+  width:52px;height:52px;border-radius:50%;
+  background:var(--dark);color:white;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 2px 20px rgba(0,0,0,0.2);
+  cursor:pointer;
+  animation:widgetAppear .5s ease-out .5s both;
+  transition:transform .2s,background .2s;
+}
+.fab:hover{transform:scale(1.1);background:var(--green)}
+.fab:active{transform:scale(0.88)}
+.fab svg{width:22px;height:22px;fill:white}
+
+/* ─── Responsive ─── */
+@media(min-width:640px){
+  .hero-h1{font-size:40px;width:80%}
+  .stats-inner{grid-template-columns:repeat(4,1fr)}
+  .demo-cards-row{flex-wrap:nowrap}
+  .pill-label{font-size:13px}
+  .pricing-cards{flex-direction:row;align-items:stretch}
+  .pricing-card{flex:1}
+}
+@media(min-width:768px){
+  .hero-h1{font-size:48px;width:70%}
+  .feature-h2{font-size:32px}
+  .cta-block-title{font-size:32px}
+}
+
+/* ─── Scroll Reveal ─── */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.reveal.visible{opacity:1;transform:none}
+.reveal-left{opacity:0;transform:translateX(-30px);transition:opacity .6s ease,transform .6s ease}
+.reveal-left.visible{opacity:1;transform:none}
+.reveal-right{opacity:0;transform:translateX(30px);transition:opacity .6s ease,transform .6s ease}
+.reveal-right.visible{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<!-- ─── Navigation ─── -->
+<nav class="nav-wrapper">
+  <div class="nav-inner">
+    <div class="nav-row">
+      <div class="nav-logo">Alpha<span>Korner</span></div>
+
+      <!-- Nav links center -->
+      <div class="nav-links">
+        <!-- Features dropdown -->
+        <div class="nav-dropdown-wrap">
+          <button class="nav-link has-dropdown">
+            Nos solutions
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="nav-dropdown">
+            <a href="#features" class="nav-dropdown-item" onclick="document.getElementById('features').scrollIntoView({behavior:'smooth'});return false">
+              <div class="nav-dropdown-item-icon">
+                <svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+              </div>
+              <div class="nav-dropdown-item-text">
+                <div class="nav-dropdown-item-label">Développement web</div>
+                <div class="nav-dropdown-item-sub">Apps sur mesure & interfaces</div>
+              </div>
+            </a>
+            <a href="#features" class="nav-dropdown-item" onclick="document.getElementById('features').scrollIntoView({behavior:'smooth'});return false">
+              <div class="nav-dropdown-item-icon">
+                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              </div>
+              <div class="nav-dropdown-item-text">
+                <div class="nav-dropdown-item-label">Automatisation</div>
+                <div class="nav-dropdown-item-sub">Workflows & intégrations</div>
+              </div>
+            </a>
+            <a href="#features" class="nav-dropdown-item" onclick="document.getElementById('features').scrollIntoView({behavior:'smooth'});return false">
+              <div class="nav-dropdown-item-icon">
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              </div>
+              <div class="nav-dropdown-item-text">
+                <div class="nav-dropdown-item-label">Gamification & Marketing</div>
+                <div class="nav-dropdown-item-sub">Roues, QR codes, Link in bio</div>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <a href="#pricing" class="nav-link" onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'});return false">Tarifs</a>
+
+        <a href="#contact" class="nav-link" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'});return false">Contact</a>
+      </div>
+
+      <!-- Right actions -->
+      <div class="nav-actions">
+        <a href="tel:+33353630332" class="nav-tel">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.38 2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.81a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <span class="tel-label">03.53.63.03.32</span>
+        </a>
+        <a href="#contact" class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'});return false">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+          Nous contacter
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ─── Page Wrapper ─── -->
+<div class="page-wrap">
+
+  <!-- ─── Hero ─── -->
+  <div class="hero-section">
+    <div class="hero-inner">
+
+      <div class="hero-badge">
+        <div class="badge-dot"></div>
+        <span>Logiciels sur mesure à Strasbourg</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M10.3565 4.25685V1.41797M10.3565 1.41797H7.51761M10.3565 1.41797L6.09817 5.67629M5.15187 1.41797H4.11095C3.31599 1.41797 2.9185 1.41797 2.61487 1.57268C2.34779 1.70877 2.13064 1.92591 1.99455 2.19299C1.83984 2.49663 1.83984 2.89411 1.83984 3.68907V7.6635C1.83984 8.45844 1.83984 8.85594 1.99455 9.15959C2.13064 9.42667 2.34779 9.64379 2.61487 9.77988C2.9185 9.9346 3.31599 9.9346 4.11095 9.9346H8.08538C8.88032 9.9346 9.27782 9.9346 9.58147 9.77988C9.84855 9.64379 10.0657 9.42667 10.2018 9.15959C10.3565 8.85594 10.3565 8.45844 10.3565 7.6635V6.6226" stroke="#8E8E93" stroke-width="0.85" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+
+      <div class="hero-texts">
+        <h1 class="hero-h1">Des logiciels qui font vraiment la différence</h1>
+        <p class="hero-sub">Alpha Korner conçoit des applications web et solutions sur mesure qui automatisent, simplifient et boostent votre activité.</p>
+      </div>
+
+      <button class="hero-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+        <div>
+          <div class="hero-btn-label">Démarrer un projet</div>
+        </div>
+        <div class="hero-btn-badge">
+          <span>Devis gratuit</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 21 17" fill="none"><path d="M10.4427 8.301C10.4427 8.804 10.301 9.295 10.0337 9.721L8.607 11.994L5.713 16.603H3.885L8.641 9.029H0V7.573H8.639L4.532 1.032L3.886.001H5.713L8.544 4.505L10.034 6.881C10.168 7.094 10.27 7.323 10.338 7.562C10.407 7.801 10.443 8.05 10.443 8.301Z" fill="white"/></svg>
+        </div>
+      </button>
+
+    </div>
+  </div>
+
+  <!-- ─── Pills / Features Overview ─── -->
+  <div class="pills-section">
+    <div class="pills-bg">
+      <div class="pills-content">
+        <div class="pills-row">
+          <button class="pill active" onclick="showDemo(this,'dev')">
+            <span class="pill-dot-wrap active"><span class="pill-dot active"></span></span>
+            <span class="pill-label">Développement web</span>
+          </button>
+          <button class="pill" onclick="showDemo(this,'crm')">
+            <span class="pill-dot-wrap inactive"><span class="pill-dot inactive"></span></span>
+            <span class="pill-label">CRM & ERP sur mesure</span>
+          </button>
+        </div>
+        <div class="pills-row">
+          <button class="pill" onclick="showDemo(this,'auto')">
+            <span class="pill-dot-wrap inactive"><span class="pill-dot inactive"></span></span>
+            <span class="pill-label">Automatisation</span>
+          </button>
+          <button class="pill" onclick="showDemo(this,'mobile')">
+            <span class="pill-dot-wrap inactive"><span class="pill-dot inactive"></span></span>
+            <span class="pill-label">Applications mobiles</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Demo area -->
+      <div class="demo-area">
+        <div class="demo-card" id="demo-dev">
+          <div class="demo-icon">
+            <svg viewBox="0 0 24 24" fill="white"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>
+          </div>
+          <div class="demo-card-title">Applications web sur mesure</div>
+          <div class="demo-card-sub">Interfaces modernes, performantes et adaptées à votre métier. Du prototype à la mise en production.</div>
+          <div class="demo-cards-row">
+            <div class="demo-mini-card">
+              <div class="demo-mini-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg></div>
+              <div class="demo-mini-label">Performance</div>
+              <div class="demo-mini-value">99<span style="font-size:14px;color:var(--green)">%</span></div>
+            </div>
+            <div class="demo-mini-card">
+              <div class="demo-mini-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div>
+              <div class="demo-mini-label">Sécurité</div>
+              <div class="demo-mini-value">A<span style="font-size:14px;color:var(--green)">+</span></div>
+            </div>
+            <div class="demo-mini-card">
+              <div class="demo-mini-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></div>
+              <div class="demo-mini-label">Délai moyen</div>
+              <div class="demo-mini-value">4<span style="font-size:14px;color:var(--green)">sem</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="demo-card" id="demo-crm" style="display:none">
+          <div class="demo-icon" style="animation-name:floatCard2">
+            <svg viewBox="0 0 24 24" fill="white"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+          </div>
+          <div class="demo-card-title">CRM & ERP personnalisés</div>
+          <div class="demo-card-sub">Gérez vos clients, vos ventes et vos processus avec un outil calqué sur votre réalité terrain.</div>
+          <div class="demo-cards-row">
+            <div class="demo-mini-card">
+              <div class="demo-mini-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg></div>
+              <div class="demo-mini-label">Clients gérés</div>
+              <div class="demo-mini-value">∞</div>
+            </div>
+            <div class="demo-mini-card">
+              <div class="demo-mini-icon"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg></div>
+              <div class="demo-mini-label">Gain productivité</div>
+              <div class="demo-mini-value">+40<span style="font-size:14px;color:var(--green)">%</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="demo-card" id="demo-auto" style="display:none">
+          <div class="demo-icon">
+            <svg viewBox="0 0 24 24" fill="white"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <div class="demo-card-title">Automatisation intelligente</div>
+          <div class="demo-card-sub">Supprimez les tâches répétitives. Vos équipes se concentrent sur ce qui a vraiment de la valeur.</div>
+        </div>
+
+        <div class="demo-card" id="demo-mobile" style="display:none">
+          <div class="demo-icon">
+            <svg viewBox="0 0 24 24" fill="white"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+          </div>
+          <div class="demo-card-title">Applications mobiles</div>
+          <div class="demo-card-sub">iOS et Android natifs ou hybrides. Une expérience utilisateur soignée sur tous les appareils.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── Trust ─── -->
+  <div class="trust-section reveal">
+    <div class="trust-avatars">
+      <div class="trust-avatar">M</div>
+      <div class="trust-avatar" style="background:linear-gradient(135deg,#4facfe,#00f2fe)">S</div>
+      <div class="trust-avatar" style="background:linear-gradient(135deg,#43e97b,#38f9d7)">A</div>
+      <div class="trust-avatar" style="background:linear-gradient(135deg,#fa709a,#fee140)">R</div>
+    </div>
+    <p class="trust-label">Ils nous font confiance, <strong>entreprises et créateurs</strong></p>
+  </div>
+
+  <!-- ─── Stats ─── -->
+  <div class="stats-section reveal">
+    <p class="stats-headline">Conçu pour les entreprises et les équipes qui veulent des résultats concrets et une interface soignée.</p>
+    <div class="stats-inner">
+      <div class="stat-item">
+        <div class="stat-value">98<span class="stat-unit">%</span></div>
+        <div class="stat-label">Clients satisfaits de leur livraison</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">4<span class="stat-unit">sem</span></div>
+        <div class="stat-label">Délai moyen de première version</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">+40<span class="stat-unit">%</span></div>
+        <div class="stat-label">Gain de productivité moyen constaté</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">100<span class="stat-unit">%</span></div>
+        <div class="stat-label">Code livré et propriété du client</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── Features ─── -->
+  <div class="features-section" id="features">
+
+    <div class="feature-block reveal">
+      <div class="feature-eyebrow">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+        <span>Développement</span>
+      </div>
+      <h2 class="feature-h2">Des applications <em>faites pour vous</em>, pas pour tout le monde.</h2>
+      <p class="feature-desc">Chaque logiciel Alpha Korner est conçu spécifiquement pour votre activité. Pas de template générique, pas de fonctionnalités inutiles. Juste ce dont vous avez besoin, parfaitement exécuté.</p>
+      <a href="#contact" class="feature-link" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'});return false">
+        Discuter de votre projet
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+      </a>
+      <div class="feat-cards">
+        <div class="feat-card">
+          <div class="feat-card-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
+          <div class="feat-card-body">
+            <div class="feat-card-title">Interface moderne & responsive</div>
+            <div class="feat-card-desc">Vos utilisateurs arrivent sur une interface claire, fluide et optimisée sur tous les écrans.</div>
+          </div>
+        </div>
+        <div class="feat-card">
+          <div class="feat-card-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <div class="feat-card-body">
+            <div class="feat-card-title">Sécurité & hébergement inclus</div>
+            <div class="feat-card-desc">Architecture sécurisée, HTTPS, sauvegardes automatiques. Vous dormez tranquille.</div>
+          </div>
+        </div>
+        <div class="feat-card">
+          <div class="feat-card-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+          <div class="feat-card-body">
+            <div class="feat-card-title">Performance optimisée</div>
+            <div class="feat-card-desc">Temps de chargement minimal, score Lighthouse 90+, expérience utilisateur impeccable.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="feature-block reveal">
+      <div class="feature-eyebrow">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <span>Automatisation</span>
+      </div>
+      <h2 class="feature-h2">Supprimez les tâches répétitives. <em>Concentrez-vous sur l'essentiel.</em></h2>
+      <p class="feature-desc">Vos équipes passent trop de temps sur des opérations manuelles ? Alpha Korner automatise vos processus métier pour que votre énergie soit investie là où elle crée vraiment de la valeur.</p>
+      <a href="#contact" class="feature-link" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'});return false">
+        Voir comment ça fonctionne
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+      </a>
+      <div class="feat-cards">
+        <div class="feat-card">
+          <div class="feat-card-icon"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div>
+          <div class="feat-card-body">
+            <div class="feat-card-title">Intégrations & API</div>
+            <div class="feat-card-desc">Connectez vos outils existants. Salesforce, HubSpot, Zapier, ou votre propre ERP.</div>
+          </div>
+        </div>
+        <div class="feat-card">
+          <div class="feat-card-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+          <div class="feat-card-body">
+            <div class="feat-card-title">Workflows automatiques</div>
+            <div class="feat-card-desc">Devis, factures, relances, notifications. Chaque étape se déclenche automatiquement.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="feature-block reveal">
+      <div class="feature-eyebrow">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <span>Engagement & Gamification</span>
+      </div>
+      <h2 class="feature-h2">Fidélisez vos clients avec des <em>expériences interactives.</em></h2>
+      <p class="feature-desc">Roues à prizes, programmes de fidélité, QR codes promotionnels, link in bio personnalisés… Alpha Korner conçoit des outils d'engagement sur mesure pour restaurants, commerces et créateurs.</p>
+      <a href="#contact" class="feature-link" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'});return false">
+        Découvrir nos outils marketing
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+      </a>
+      <div class="feat-cards">
+        <div class="feat-card">
+          <div class="feat-card-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
+          <div class="feat-card-body">
+            <div class="feat-card-title">Roue à prizes & jeux concours</div>
+            <div class="feat-card-desc">Augmentez l'engagement et les visites en magasin grâce à des animations ludiques et personnalisées.</div>
+          </div>
+        </div>
+        <div class="feat-card">
+          <div class="feat-card-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg></div>
+          <div class="feat-card-body">
+            <div class="feat-card-title">QR codes & Link in bio</div>
+            <div class="feat-card-desc">Des liens intelligents et des QR codes à votre image, avec tableau de bord et analytics intégrés.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ─── Pricing ─── -->
+  <div class="pricing-section reveal" id="pricing">
+    <div class="pricing-header">
+      <div class="pricing-eyebrow">
+        <span>Tarifs SaaS</span>
+      </div>
+      <h2 class="pricing-title">Des formules claires,<br>sans mauvaise surprise.</h2>
+      <p class="pricing-sub">Choisissez la formule adaptée à votre activité. Devis sur mesure disponible pour les projets complexes.</p>
+    </div>
+
+    <div class="pricing-cards">
+
+      <!-- Starter -->
+      <div class="pricing-card reveal">
+        <div class="pricing-plan">Starter</div>
+        <div class="pricing-price">
+          <span class="pricing-price-currency">€</span>
+          49<span class="pricing-price-period">/mois</span>
+        </div>
+        <p class="pricing-desc">Parfait pour les indépendants et petites structures qui veulent digitaliser rapidement.</p>
+        <hr class="pricing-divider">
+        <div class="pricing-features">
+          <div class="pricing-feature"><div class="pricing-feature-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>1 application web</div>
+          <div class="pricing-feature"><div class="pricing-feature-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Jusqu'à 500 utilisateurs</div>
+          <div class="pricing-feature"><div class="pricing-feature-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Hébergement inclus</div>
+          <div class="pricing-feature"><div class="pricing-feature-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Support email 5j/7</div>
+        </div>
+        <a href="tel:+33353630332" class="pricing-card-btn">Commencer →</a>
+      </div>
+
+      <!-- Pro (featured) -->
+      <div class="pricing-card featured reveal">
+        <div class="pricing-badge">⭐ Le plus populaire</div>
+        <div class="pricing-plan">Pro</div>
+        <div class="pricing-price" style="color:white">
+          <span class="pricing-price-currency" style="color:white">€</span>
+          149<span class="pricing-price-period">/mois</span>
+        </div>
+        <p class="pricing-desc">Pour les PME et commerces qui veulent automatiser et engager leurs clients.</p>
+        <hr class="pricing-divider">
+        <div class="pricing-features">
+          <div class="pricing-feature"><div class="pricing-feature-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>3 applications web</div>
+          <div class="pricing-feature"><div class="pricing-feature-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Utilisateurs illimités</div>
+          <div class="pricing-feature"><div class="pricing-feature-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Roue à prizes & QR codes</div>
+          <div class="pricing-feature"><div class="pricing-feature-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Automatisations avancées</div>
+          <div class="pricing-feature"><div class="pricing-feature-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Support prioritaire 7j/7</div>
+        </div>
+        <a href="tel:+33353630332" class="pricing-card-btn">Démarrer l'essai gratuit →</a>
+      </div>
+
+      <!-- Sur mesure -->
+      <div class="pricing-card reveal">
+        <div class="pricing-plan">Sur mesure</div>
+        <div class="pricing-price">
+          <span style="font-size:28px;font-weight:700;color:var(--dark);letter-spacing:-1px">Devis<br>gratuit</span>
+        </div>
+        <p class="pricing-desc">Pour les projets complexes, les ERP, CRM ou solutions multi-sites avec intégrations spécifiques.</p>
+        <hr class="pricing-divider">
+        <div class="pricing-features">
+          <div class="pricing-feature"><div class="pricing-feature-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Développement 100% sur mesure</div>
+          <div class="pricing-feature"><div class="pricing-feature-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Intégrations API tierces</div>
+          <div class="pricing-feature"><div class="pricing-feature-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Code livré — vous êtes propriétaire</div>
+          <div class="pricing-feature"><div class="pricing-feature-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Accompagnement dédié</div>
+        </div>
+        <a href="tel:+33353630332" class="pricing-card-btn">Nous appeler →</a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ─── Testimonial ─── -->
+  <div class="testimonial-section reveal">
+    <p class="testimonial-label">Ce que disent nos clients</p>
+    <div class="testimonial-card">
+      <div class="testimonial-stars">
+        <span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span>
+      </div>
+      <p class="testimonial-quote">« Alpha Korner a transformé notre façon de travailler. L'application est exactement ce qu'on voulait — intuitive, rapide et nos équipes l'ont adoptée dès le premier jour. C'est tellement rare de trouver une équipe qui comprend aussi bien nos besoins métier. »</p>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar">M</div>
+        <div>
+          <div class="testimonial-name">Marc D.</div>
+          <div class="testimonial-role">Directeur, Commerce Strasbourgeois</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── Contact ─── -->
+  <div class="cta-section" id="contact">
+    <div class="cta-block reveal">
+      <div class="cta-block-title">Parlons de votre projet</div>
+      <p class="cta-block-sub">Un devis gratuit et une réponse sous 24h. Sans engagement, sans blabla.</p>
+      <div class="cta-block-actions">
+        <a href="mailto:Contact@alphakorner.fr" class="cta-block-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Envoyer un message
+        </a>
+        <a href="tel:+33353630332" class="cta-tel-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.38 2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.81a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          Appeler le 03.53.63.03.32
+        </a>
+      </div>
+    </div>
+
+    <div class="info-cards reveal">
+      <div class="info-card tel-highlight">
+        <div class="info-card-icon">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.38 2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.81a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
+        <div>
+          <div class="info-card-label">📞 Appelez-nous directement</div>
+          <a href="tel:+33353630332">03.53.63.03.32</a>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-icon">
+          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <div>
+          <div class="info-card-label">Email</div>
+          <a href="mailto:Contact@alphakorner.fr">Contact@alphakorner.fr</a>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-icon">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div>
+          <div class="info-card-label">Adresse</div>
+          <a href="https://maps.google.com/?q=15+Route+de+Hausbergen+67300+Schiltigheim" target="_blank">15 Route de Hausbergen, 67300 Schiltigheim</a>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </div>
+        <div>
+          <div class="info-card-label">Site web</div>
+          <a href="https://alphaos67.github.io/Alpha-OS/" target="_blank">alphakorner.fr</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── FAQ ─── -->
+  <div class="faq-section">
+    <h2 class="faq-title">Encore des questions ?</h2>
+    <p class="faq-sub">On a les réponses</p>
+
+    <div class="faq-item reveal">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-text">C'est quoi Alpha Korner ?</span>
+        <span class="faq-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+      </div>
+      <div class="faq-a">Alpha Korner est une société strasbourgeoise spécialisée dans le développement de logiciels sur mesure, d'applications web et de solutions d'automatisation pour les entreprises et les commerces. Nous concevons des outils digitaux adaptés à votre réalité terrain.</div>
+    </div>
+
+    <div class="faq-item reveal">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-text">À qui s'adresse Alpha Korner ?</span>
+        <span class="faq-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+      </div>
+      <div class="faq-a">Nos solutions s'adressent aux PME, commerces, restaurants, créateurs de contenus et toute structure souhaitant digitaliser ou automatiser ses processus. Nous travaillons aussi bien avec des startups qu'avec des entreprises établies.</div>
+    </div>
+
+    <div class="faq-item reveal">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-text">Combien coûte un projet ?</span>
+        <span class="faq-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+      </div>
+      <div class="faq-a">Chaque projet est unique. Nous proposons un devis gratuit et personnalisé après un premier échange. Les tarifs varient selon la complexité du projet. Nous proposons aussi des formules mensuelles pour les solutions SaaS et les outils en ligne.</div>
+    </div>
+
+    <div class="faq-item reveal">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-text">Quel est le délai de livraison ?</span>
+        <span class="faq-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+      </div>
+      <div class="faq-a">Pour une application web standard, nous livrons une première version fonctionnelle en 3 à 6 semaines. Les projets plus complexes font l'objet d'un planning détaillé avec des jalons clairs. Nous sommes transparents sur les délais dès le départ.</div>
+    </div>
+
+    <div class="faq-item reveal">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-text">Puis-je garder la propriété du code ?</span>
+        <span class="faq-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+      </div>
+      <div class="faq-a">Oui, absolument. Tout le code produit par Alpha Korner vous appartient entièrement à la livraison. Vous n'êtes jamais dépendant de nous, même si nous restons disponibles pour la maintenance et les évolutions.</div>
+    </div>
+
+    <div class="faq-item reveal">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-text">Comment vous contacter ?</span>
+        <span class="faq-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+      </div>
+      <div class="faq-a">Appelez-nous au 03.53.63.03.32, écrivez-nous à Contact@alphakorner.fr ou venez nous voir au 15 Route de Hausbergen, 67300 Schiltigheim. Nous répondons sous 24h maximum.</div>
+    </div>
+  </div>
+
+  <!-- ─── Final CTA ─── -->
+  <div class="final-cta reveal">
+    <p class="final-cta-title">Si vous lisez ceci, votre projet mérite d'exister.</p>
+    <p class="final-cta-sub">Un premier échange gratuit de 30 minutes pour comprendre vos besoins et vous proposer la meilleure approche.</p>
+    <a href="tel:+33353630332" class="final-cta-btn">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.38 2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.81a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      Nous appeler maintenant
+    </a>
+  </div>
+
+  <!-- ─── Footer ─── -->
+  <footer class="footer">
+    <div class="footer-brand">Alpha<span>Korner</span></div>
+    <div class="footer-contact">
+      <a href="tel:+33353630332">📞 03.53.63.03.32</a>
+      <a href="mailto:Contact@alphakorner.fr">✉️ Contact@alphakorner.fr</a>
+      <a href="https://maps.google.com/?q=15+Route+de+Hausbergen+67300+Schiltigheim" target="_blank">📍 15 Route de Hausbergen, 67300 Schiltigheim</a>
+    </div>
+    <div class="footer-links">
+      <a href="#features" onclick="document.getElementById('features').scrollIntoView({behavior:'smooth'});return false">Nos solutions</a>
+      <a href="#pricing" onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'});return false">Tarifs</a>
+      <a href="#contact" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'});return false">Contact</a>
+      <a href="https://alphaos67.github.io/Alpha-OS/" target="_blank">Site principal</a>
+    </div>
+    <p class="footer-copy">© 2026 Alpha Korner — Logiciels sur mesure à Strasbourg</p>
+  </footer>
+
+</div><!-- end page-wrap -->
+
+<!-- ─── FAB ─── -->
+<a href="tel:+33353630332" class="fab" title="Nous appeler">
+  <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round">
+    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.38 2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.81a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+  </svg>
+</a>
+
+<script>
+// ─── Pill / Demo switcher ───
+function showDemo(btn, key) {
+  document.querySelectorAll('.pill').forEach(p => {
+    p.classList.remove('active');
+    const dotWrap = p.querySelector('.pill-dot-wrap');
+    const dot = p.querySelector('.pill-dot');
+    dotWrap.classList.remove('active'); dotWrap.classList.add('inactive');
+    dot.classList.remove('active'); dot.classList.add('inactive');
+    p.style.boxShadow = 'none';
+  });
+  btn.classList.add('active');
+  const dw = btn.querySelector('.pill-dot-wrap');
+  const d = btn.querySelector('.pill-dot');
+  dw.classList.remove('inactive'); dw.classList.add('active');
+  d.classList.remove('inactive'); d.classList.add('active');
+  btn.style.boxShadow = '0 2px 10px rgba(0,0,0,0.06)';
+  ['dev','crm','auto','mobile'].forEach(k => {
+    const el = document.getElementById('demo-' + k);
+    if (el) el.style.display = k === key ? '' : 'none';
+  });
+}
+
+// ─── FAQ toggle ───
+function toggleFaq(qEl) {
+  const item = qEl.parentElement;
+  item.classList.toggle('open');
+}
+
+// ─── Scroll Reveal ───
+const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12 });
+revealEls.forEach(el => observer.observe(el));
+
+// ─── Stagger reveal for feat-cards ───
+document.querySelectorAll('.feat-card').forEach((card, i) => {
+  card.style.transitionDelay = (i * 0.08) + 's';
+  card.style.opacity = '0';
+  card.style.transform = 'translateY(16px)';
+  card.style.transition = 'opacity .5s ease, transform .5s ease';
+  const cardObserver = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'none';
+        cardObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  cardObserver.observe(card);
+});
+
+// ─── Counter animation ───
+function animateCounter(el, target, suffix) {
+  let start = 0;
+  const duration = 1500;
+  const step = (timestamp) => {
+    if (!start) start = timestamp;
+    const progress = Math.min((timestamp - start) / duration, 1);
+    const ease = 1 - Math.pow(1 - progress, 3);
+    el.textContent = Math.round(ease * target) + suffix;
+    if (progress < 1) requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+}
+
+// ─── Stats scroll trigger ───
+const statsSection = document.querySelector('.stats-section');
+if (statsSection) {
+  const statsObserver = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const values = [98, 4, 40, 100];
+        const suffixes = ['%', 'sem', '%', '%'];
+        document.querySelectorAll('.stat-value').forEach((el, i) => {
+          el.innerHTML = '';
+          setTimeout(() => {
+            animateCounter(el, values[i], suffixes[i]);
+          }, i * 150);
+        });
+        statsObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  statsObserver.observe(statsSection);
+}
+</script>
+</body>
+</html>
