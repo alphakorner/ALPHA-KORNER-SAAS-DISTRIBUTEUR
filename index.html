@@ -43,7 +43,9 @@ img,video{max-width:100%;height:auto;display:block}
 @keyframes dotBlink{0%,80%,100%{opacity:0}40%{opacity:1}}
 @keyframes slideInNav{0%{transform:translateY(-100%);opacity:0}100%{transform:translateY(0);opacity:1}}
 @keyframes counterUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-@keyframes dropdownIn{0%{opacity:0;transform:translateY(-6px)}100%{opacity:1;transform:translateY(0)}}
+@keyframes logoScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+@keyframes float-hero{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes glow-border{0%,100%{box-shadow:0 0 0 0 rgba(52,209,108,0.0)}50%{box-shadow:0 0 0 4px rgba(52,209,108,0.15)}}
 
 /* ─── Layout Utilities ─── */
 .flex{display:flex}.inline-flex{display:inline-flex}.grid{display:grid}.block{display:block}
@@ -74,76 +76,18 @@ img,video{max-width:100%;height:auto;display:block}
 .nav-inner{
   display:flex;flex-direction:column;width:100%;max-width:100%;
   background:white;padding:14px 20px;
-  border-bottom:1px solid var(--border);
+  border:1px solid var(--border);
   box-shadow:var(--shadow-nav);
 }
 .nav-row{display:flex;justify-content:space-between;align-items:center}
-.nav-logo{
-  font-size:22px;font-weight:700;color:var(--dark);
-  letter-spacing:-0.8px;line-height:1;
-}
-.nav-logo span{color:var(--green)}
 
-/* ─── Nav Menu Links ─── */
-.nav-links{
-  display:flex;align-items:center;gap:4px;
-  flex:1;justify-content:center;
+/* ─── AK Logo SVG ─── */
+.nav-logo-svg{
+  display:flex;align-items:center;gap:10px;text-decoration:none;
 }
-.nav-link{
-  font-size:14px;font-weight:500;color:var(--dark);
-  padding:7px 12px;border-radius:10px;
-  transition:background .15s,color .15s;
-  letter-spacing:-0.3px;white-space:nowrap;
-  position:relative;
-}
-.nav-link:hover{background:var(--bg-page);color:var(--dark)}
-.nav-link.has-dropdown{display:flex;align-items:center;gap:4px}
-.nav-link.has-dropdown svg{transition:transform .2s}
-.nav-link.has-dropdown:hover svg{transform:rotate(180deg)}
-
-/* Dropdown */
-.nav-dropdown-wrap{position:relative}
-.nav-dropdown{
-  position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%);
-  background:white;border:1px solid var(--border);border-radius:16px;
-  padding:8px;min-width:220px;
-  box-shadow:0 8px 30px rgba(0,0,0,0.08),0 2px 8px rgba(0,0,0,0.04);
-  display:none;z-index:100;
-  animation:dropdownIn .15s ease-out both;
-}
-.nav-dropdown-wrap:hover .nav-dropdown,
-.nav-dropdown-wrap:focus-within .nav-dropdown{display:block}
-.nav-dropdown-item{
-  display:flex;align-items:center;gap:10px;
-  padding:10px 12px;border-radius:10px;
-  font-size:14px;font-weight:500;color:var(--dark);
-  transition:background .12s;cursor:pointer;
-  letter-spacing:-0.3px;
-}
-.nav-dropdown-item:hover{background:var(--bg-page)}
-.nav-dropdown-item-icon{
-  width:32px;height:32px;border-radius:8px;
-  background:rgba(52,209,108,0.1);flex-shrink:0;
-  display:flex;align-items:center;justify-content:center;
-}
-.nav-dropdown-item-icon svg{width:16px;height:16px;stroke:var(--green);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.nav-dropdown-item-text{display:flex;flex-direction:column;gap:1px}
-.nav-dropdown-item-label{font-size:13px;font-weight:600;color:var(--dark)}
-.nav-dropdown-item-sub{font-size:11px;color:var(--gray);letter-spacing:-0.1px}
-
-/* ─── Nav Right Actions ─── */
-.nav-actions{display:flex;align-items:center;gap:8px;flex-shrink:0}
-
-/* Tel quick button */
-.nav-tel{
-  display:inline-flex;align-items:center;gap:6px;
-  background:var(--bg-page);border:1px solid var(--border);
-  color:var(--dark);border-radius:11px;padding:7px 13px;
-  font-size:13px;font-weight:600;letter-spacing:-0.3px;
-  transition:background .2s,border-color .2s;
-}
-.nav-tel:hover{background:white;border-color:#ccc}
-.nav-tel svg{flex-shrink:0}
+.ak-logo-mark{width:38px;height:38px;flex-shrink:0}
+.ak-logo-wordmark{font-size:20px;font-weight:700;color:var(--dark);letter-spacing:-0.8px;line-height:1}
+.ak-logo-wordmark span{color:var(--green)}
 
 .nav-cta{
   display:inline-flex;align-items:center;gap:6px;
@@ -155,16 +99,6 @@ img,video{max-width:100%;height:auto;display:block}
 }
 .nav-cta:hover{transform:scale(1.04);box-shadow:0 4px 16px rgba(52,209,108,0.35)}
 .nav-cta:active{transform:scale(0.97)}
-
-/* Mobile: hide nav-links on small screens, show hamburger or just collapse */
-@media(max-width:640px){
-  .nav-links{display:none}
-  .nav-tel .tel-label{display:none}
-}
-@media(min-width:641px) and (max-width:800px){
-  .nav-links{gap:0}
-  .nav-link{padding:7px 8px;font-size:13px}
-}
 
 /* ─── Hero Section ─── */
 .page-wrap{
@@ -228,19 +162,24 @@ img,video{max-width:100%;height:auto;display:block}
   position:relative;width:100%;max-width:1200px;overflow:hidden;
   border-radius:20px;margin:0 auto;
   background-image:linear-gradient(rgb(233,233,233) 0%,rgb(242,242,242) 45%,rgb(255,255,255) 72%);
+  /* Live effect */
+  box-shadow:0 4px 24px rgba(0,0,0,0.06);
+  transition:box-shadow .3s;
 }
+.pills-bg:hover{box-shadow:0 8px 32px rgba(52,209,108,0.10)}
 .pills-content{display:flex;width:100%;flex-direction:column;align-items:center;gap:8px;padding:12px;padding-top:16px}
 .pills-row{display:flex;width:100%;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px}
 .pill{
   display:inline-flex;flex-shrink:0;align-items:center;gap:10px;
-  border-radius:11px;border:1px solid #E8E8E8;background:white;
-  padding:10px 14px;text-align:left;
-  transition:box-shadow .2s,transform .15s;
+  border-radius:13px;border:1px solid #E8E8E8;background:white;
+  padding:12px 18px;text-align:left;
+  transition:box-shadow .2s,transform .15s,border-color .2s;
   cursor:pointer;user-select:none;
+  min-width:160px;
 }
-.pill:hover{box-shadow:0 2px 12px rgba(0,0,0,0.1);transform:translateY(-1px)}
+.pill:hover{box-shadow:0 2px 12px rgba(0,0,0,0.1);transform:translateY(-1px);border-color:var(--green)}
 .pill:active{transform:scale(0.98)}
-.pill.active{box-shadow:0 2px 10px rgba(0,0,0,0.06)}
+.pill.active{box-shadow:0 2px 10px rgba(0,0,0,0.06);border-color:var(--green)}
 .pill-dot-wrap{
   display:inline-flex;width:18px;height:18px;flex-shrink:0;
   align-items:center;justify-content:center;border-radius:50%;
@@ -261,7 +200,9 @@ img,video{max-width:100%;height:auto;display:block}
   overflow:hidden;border-radius:16px;border:5px solid #F5F5F5;background:white;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
   min-height:260px;padding:30px;gap:20px;
+  transition:transform .3s ease, box-shadow .3s ease;
 }
+.demo-card:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(0,0,0,0.08)}
 .demo-icon{
   width:64px;height:64px;border-radius:16px;
   background:linear-gradient(135deg,var(--green) 0%,#1aad55 100%);
@@ -277,7 +218,9 @@ img,video{max-width:100%;height:auto;display:block}
   background:white;border-radius:14px;padding:16px;flex:1;min-width:140px;max-width:200px;
   box-shadow:0 2px 12px rgba(0,0,0,0.06);
   animation:floatCard2 5s ease-in-out infinite;
+  transition:transform .2s, box-shadow .2s;
 }
+.demo-mini-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(52,209,108,0.15)}
 .demo-mini-card:nth-child(2){animation-delay:.8s}
 .demo-mini-card:nth-child(3){animation-delay:1.6s}
 .demo-mini-icon{
@@ -290,30 +233,66 @@ img,video{max-width:100%;height:auto;display:block}
 .demo-mini-label{font-size:11px;font-weight:500;color:var(--gray);margin-bottom:4px}
 .demo-mini-value{font-size:20px;font-weight:700;color:var(--dark);letter-spacing:-0.8px}
 
-/* ─── Trusted / Social Proof ─── */
+/* ─── Partner Logo Scroll ─── */
 .trust-section{
   display:flex;flex-direction:column;align-items:center;
-  gap:4px;margin-top:50px;width:100%;
+  gap:16px;margin-top:50px;width:100%;
 }
 .trust-label{font-size:15px;font-weight:400;color:var(--gray);text-align:center}
 .trust-label strong{color:var(--dark);font-weight:600}
-.trust-avatars{
-  display:flex;align-items:center;justify-content:center;gap:-4px;margin-top:8px;
+
+/* Logo scroll strip */
+.logos-scroll-outer{
+  width:100%;overflow:hidden;position:relative;
+  padding:12px 0;
 }
-.trust-avatar{
-  width:32px;height:32px;border-radius:50%;
-  background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);
-  border:2px solid white;margin-left:-6px;
+.logos-scroll-outer::before,
+.logos-scroll-outer::after{
+  content:'';position:absolute;top:0;bottom:0;width:80px;z-index:2;pointer-events:none;
+}
+.logos-scroll-outer::before{left:0;background:linear-gradient(to right,var(--bg-page,#f8f8f8),transparent)}
+.logos-scroll-outer::after{right:0;background:linear-gradient(to left,var(--bg-page,#f8f8f8),transparent)}
+.logos-scroll-track{
+  display:flex;align-items:center;gap:20px;
+  width:max-content;
+  animation:logoScroll 28s linear infinite;
+}
+.logos-scroll-track:hover{animation-play-state:paused}
+
+.logo-bubble{
+  width:56px;height:56px;border-radius:50%;
+  background:white;
+  border:1.5px solid rgba(220,220,220,0.7);
+  box-shadow:rgba(161,161,161,0.13) 0px 0px 0px 5px,rgba(0,0,0,0.10) 0px 3px 8px 0px;
   display:flex;align-items:center;justify-content:center;
-  font-size:11px;font-weight:700;color:white;
+  flex-shrink:0;
+  transition:transform .25s ease, box-shadow .25s ease;
+  cursor:default;
+  overflow:hidden;
 }
-.trust-avatar:first-child{margin-left:0}
+.logo-bubble:hover{
+  transform:scale(1.12) translateY(-2px);
+  box-shadow:rgba(52,209,108,0.25) 0px 0px 0px 5px,rgba(0,0,0,0.12) 0px 6px 16px 0px;
+}
+.logo-bubble svg{width:28px;height:28px}
+.logo-bubble-inner{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  font-size:9px;font-weight:700;letter-spacing:-0.2px;color:#444;text-align:center;gap:1px;
+}
+.logo-bubble-inner .logo-icon{font-size:18px;line-height:1}
 
 /* ─── Stats Section ─── */
 .stats-section{
   width:100%;background:white;margin-top:70px;
   border-top:1px solid var(--border);border-bottom:1px solid var(--border);
   padding:40px 20px;
+  position:relative;overflow:hidden;
+}
+.stats-section::before{
+  content:'';position:absolute;top:-60px;left:50%;transform:translateX(-50%);
+  width:300px;height:300px;border-radius:50%;
+  background:radial-gradient(circle,rgba(52,209,108,0.06) 0%,transparent 70%);
+  pointer-events:none;
 }
 .stats-inner{
   max-width:900px;margin:0 auto;
@@ -328,7 +307,7 @@ img,video{max-width:100%;height:auto;display:block}
 .stat-label{font-size:13px;color:var(--gray);letter-spacing:-0.3px;line-height:1.3}
 .stats-headline{
   text-align:center;font-size:15px;color:var(--gray);
-  max-width:360px;margin:0 auto 30px;letter-spacing:-0.3px;line-height:1.4;
+  max-width:360px;margin:0 auto 30px;letter-spacing:-0.3px;line-height:1.6;
 }
 
 /* ─── Features Blocks ─── */
@@ -337,13 +316,18 @@ img,video{max-width:100%;height:auto;display:block}
   display:flex;flex-direction:column;gap:60px;
 }
 .feature-block{
-  display:flex;flex-direction:column;gap:24px;
+  display:flex;flex-direction:column;gap:24px;align-items:center;text-align:center;
   animation:fadeInUp .6s ease-out both;
+  background:white;border:1px solid var(--border);border-radius:24px;
+  padding:32px 24px;
+  box-shadow:0 2px 16px rgba(0,0,0,0.04);
+  transition:transform .3s ease, box-shadow .3s ease;
 }
+.feature-block:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(52,209,108,0.08)}
 .feature-eyebrow{
   display:inline-flex;align-items:center;gap:8px;
   background:rgba(52,209,108,0.1);border-radius:20px;
-  padding:4px 12px;align-self:flex-start;
+  padding:6px 16px;
 }
 .feature-eyebrow span{font-size:12px;font-weight:600;color:var(--green);letter-spacing:0.5px;text-transform:uppercase}
 .feature-h2{
@@ -351,26 +335,26 @@ img,video{max-width:100%;height:auto;display:block}
   letter-spacing:-0.9px;line-height:1.2;
 }
 .feature-h2 em{font-style:normal;color:var(--green)}
-.feature-desc{font-size:15px;color:var(--gray);line-height:1.5;letter-spacing:-0.3px}
+.feature-desc{font-size:15px;color:var(--gray);line-height:1.5;letter-spacing:-0.3px;max-width:540px}
 .feature-link{
   display:inline-flex;align-items:center;gap:6px;
   font-size:14px;font-weight:600;color:var(--dark);letter-spacing:-0.4px;
   border-bottom:1.5px solid var(--dark);padding-bottom:1px;
-  align-self:flex-start;transition:color .2s,border-color .2s;
+  transition:color .2s,border-color .2s;
 }
 .feature-link:hover{color:var(--green);border-color:var(--green)}
 .feature-link svg{transition:transform .2s}
 .feature-link:hover svg{transform:translateX(3px)}
 
 /* ─── Feature Cards ─── */
-.feat-cards{display:flex;flex-direction:column;gap:12px}
+.feat-cards{display:flex;flex-direction:column;gap:12px;width:100%;max-width:540px}
 .feat-card{
-  background:white;border:1px solid var(--border);border-radius:16px;
-  padding:20px;display:flex;align-items:flex-start;gap:14px;
+  background:var(--bg-page);border:1px solid var(--border);border-radius:16px;
+  padding:20px;display:flex;align-items:flex-start;gap:14px;text-align:left;
   box-shadow:0 2px 8px rgba(0,0,0,0.04);
-  transition:transform .2s,box-shadow .2s;
+  transition:transform .2s,box-shadow .2s,border-color .2s;
 }
-.feat-card:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,0.08)}
+.feat-card:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(52,209,108,0.10);border-color:rgba(52,209,108,0.3)}
 .feat-card-icon{
   width:40px;height:40px;border-radius:11px;flex-shrink:0;
   background:rgba(52,209,108,0.12);
@@ -381,95 +365,31 @@ img,video{max-width:100%;height:auto;display:block}
 .feat-card-title{font-size:15px;font-weight:600;color:var(--dark);letter-spacing:-0.4px}
 .feat-card-desc{font-size:13px;color:var(--gray);line-height:1.4;letter-spacing:-0.2px}
 
-/* ─── Pricing Section ─── */
-.pricing-section{
-  width:100%;margin-top:75px;padding:0 16px;
-  scroll-margin-top:80px;
-}
-.pricing-header{text-align:center;margin-bottom:32px}
-.pricing-eyebrow{
-  display:inline-flex;align-items:center;gap:8px;
-  background:rgba(52,209,108,0.1);border-radius:20px;
-  padding:4px 12px;margin-bottom:12px;
-}
-.pricing-eyebrow span{font-size:12px;font-weight:600;color:var(--green);letter-spacing:0.5px;text-transform:uppercase}
-.pricing-title{font-size:26px;font-weight:700;color:var(--dark);letter-spacing:-0.9px;line-height:1.2;margin-bottom:8px}
-.pricing-sub{font-size:15px;color:var(--gray);letter-spacing:-0.3px}
-
-.pricing-cards{display:flex;flex-direction:column;gap:16px}
-.pricing-card{
-  background:white;border:1px solid var(--border);border-radius:20px;
-  padding:24px;position:relative;overflow:hidden;
-  box-shadow:0 2px 8px rgba(0,0,0,0.04);
-  transition:transform .2s,box-shadow .2s;
-}
-.pricing-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,0.08)}
-.pricing-card.featured{
-  background:var(--dark);border-color:var(--dark);
-  color:white;
-}
-.pricing-card.featured::after{
-  content:'';position:absolute;width:200%;height:200%;
-  background:radial-gradient(ellipse at 50% 0%,rgba(52,209,108,0.15) 0%,transparent 60%);
-  top:-50%;left:-50%;pointer-events:none;
-}
-.pricing-badge{
-  display:inline-flex;align-items:center;gap:4px;
-  background:var(--green);color:white;
-  border-radius:8px;padding:3px 10px;
-  font-size:11px;font-weight:700;letter-spacing:0.3px;
-  margin-bottom:16px;
-}
-.pricing-plan{font-size:13px;font-weight:600;color:var(--gray);letter-spacing:0.5px;text-transform:uppercase;margin-bottom:6px}
-.pricing-card.featured .pricing-plan{color:rgba(255,255,255,0.5)}
-.pricing-price{
-  font-size:40px;font-weight:700;color:var(--dark);letter-spacing:-1.5px;
-  line-height:1;margin-bottom:4px;
-  display:flex;align-items:baseline;gap:4px;
-}
-.pricing-card.featured .pricing-price{color:white}
-.pricing-price-currency{font-size:22px;font-weight:600;align-self:flex-start;margin-top:6px}
-.pricing-price-period{font-size:14px;font-weight:400;color:var(--gray);margin-left:2px}
-.pricing-card.featured .pricing-price-period{color:rgba(255,255,255,0.5)}
-.pricing-desc{font-size:14px;color:var(--gray);letter-spacing:-0.3px;margin:12px 0 20px;line-height:1.4}
-.pricing-card.featured .pricing-desc{color:rgba(255,255,255,0.6)}
-.pricing-divider{border:none;border-top:1px solid var(--border);margin:0 0 20px}
-.pricing-card.featured .pricing-divider{border-color:rgba(255,255,255,0.1)}
-.pricing-features{display:flex;flex-direction:column;gap:10px;margin-bottom:24px}
-.pricing-feature{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--dark);letter-spacing:-0.2px}
-.pricing-card.featured .pricing-feature{color:rgba(255,255,255,0.85)}
-.pricing-feature-check{
-  width:20px;height:20px;border-radius:50%;flex-shrink:0;
-  background:rgba(52,209,108,0.12);
-  display:flex;align-items:center;justify-content:center;
-}
-.pricing-card.featured .pricing-feature-check{background:rgba(52,209,108,0.2)}
-.pricing-feature-check svg{width:11px;height:11px;stroke:var(--green);fill:none;stroke-width:2.5}
-.pricing-card-btn{
-  display:flex;align-items:center;justify-content:center;gap:8px;
-  border-radius:13px;padding:13px 20px;
-  font-size:14px;font-weight:600;letter-spacing:-0.3px;
-  width:100%;transition:transform .15s,box-shadow .15s;
-  background:var(--bg-page);color:var(--dark);border:1px solid var(--border);
-}
-.pricing-card.featured .pricing-card-btn{
-  background:var(--green);color:white;border:none;
-  box-shadow:0 4px 16px rgba(52,209,108,0.4);
-}
-.pricing-card-btn:hover{transform:scale(1.02)}
-.pricing-card-btn:active{transform:scale(0.98)}
-
 /* ─── Testimonial ─── */
 .testimonial-section{
   width:100%;background:white;margin-top:70px;padding:40px 20px;
   border-top:1px solid var(--border);border-bottom:1px solid var(--border);
-}
-.testimonial-label{font-size:11px;font-weight:600;color:var(--gray);letter-spacing:1px;text-transform:uppercase;text-align:center;margin-bottom:24px}
-.testimonial-card{
-  background:var(--bg-page);border:1px solid var(--border);border-radius:20px;
-  padding:24px;max-width:500px;margin:0 auto;
   position:relative;overflow:hidden;
 }
+.testimonial-section::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 0%,rgba(52,209,108,0.05) 0%,transparent 60%);
+  pointer-events:none;
+}
+.testimonial-heading{
+  font-size:22px;font-weight:700;color:var(--dark);letter-spacing:-0.8px;
+  text-align:center;margin-bottom:6px;
+}
+.testimonial-heading em{font-style:normal;color:var(--green)}
+.testimonial-label{font-size:13px;font-weight:500;color:var(--gray);letter-spacing:0.3px;text-align:center;margin-bottom:28px}
+.testimonial-card{
+  background:white;border:1.5px solid var(--border);border-radius:24px;
+  padding:28px;max-width:500px;margin:0 auto;
+  position:relative;overflow:hidden;
+  box-shadow:0 4px 24px rgba(0,0,0,0.06);
+  transition:transform .3s ease, box-shadow .3s ease;
+}
+.testimonial-card:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(52,209,108,0.12)}
 .testimonial-card::before{
   content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;
   background:linear-gradient(90deg,transparent,rgba(255,255,255,0.6),transparent);
@@ -497,7 +417,6 @@ img,video{max-width:100%;height:auto;display:block}
 .cta-section{
   width:100%;margin-top:75px;padding:0 16px 30px;
   display:flex;flex-direction:column;gap:30px;
-  scroll-margin-top:80px;
 }
 .cta-block{
   background:var(--dark);border-radius:24px;padding:32px 24px;
@@ -513,8 +432,10 @@ img,video{max-width:100%;height:auto;display:block}
   font-size:26px;font-weight:700;color:white;
   letter-spacing:-0.9px;line-height:1.2;
 }
-.cta-block-sub{font-size:14px;color:rgba(255,255,255,0.6);letter-spacing:-0.3px;line-height:1.4}
-.cta-block-actions{display:flex;flex-direction:column;gap:10px;align-items:center;width:100%}
+.cta-block-sub{
+  font-size:14px;color:rgba(255,255,255,1);
+  letter-spacing:-0.3px;line-height:1.4;font-weight:500;
+}
 .cta-block-btn{
   display:inline-flex;align-items:center;gap:8px;
   background:var(--green);color:white;border-radius:14px;
@@ -525,15 +446,6 @@ img,video{max-width:100%;height:auto;display:block}
 }
 .cta-block-btn:hover{transform:scale(1.04)}
 .cta-block-btn:active{transform:scale(0.97)}
-/* Tel CTA inside dark block */
-.cta-tel-btn{
-  display:inline-flex;align-items:center;gap:8px;
-  background:rgba(255,255,255,0.08);color:white;border-radius:14px;
-  padding:12px 24px;font-size:15px;font-weight:600;letter-spacing:-0.4px;
-  border:1px solid rgba(255,255,255,0.15);
-  transition:background .2s,transform .2s;
-}
-.cta-tel-btn:hover{background:rgba(255,255,255,0.14);transform:scale(1.02)}
 
 /* ─── Contact / Info Cards ─── */
 .info-cards{display:flex;flex-direction:column;gap:12px}
@@ -541,9 +453,9 @@ img,video{max-width:100%;height:auto;display:block}
   background:white;border:1px solid var(--border);border-radius:16px;
   padding:18px;display:flex;align-items:center;gap:14px;
   box-shadow:0 2px 8px rgba(0,0,0,0.04);
-  transition:transform .2s,box-shadow .2s;
+  transition:transform .2s,box-shadow .2s,border-color .2s;
 }
-.info-card:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,0.08)}
+.info-card:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(52,209,108,0.10);border-color:rgba(52,209,108,0.25)}
 .info-card a{color:var(--dark);font-size:15px;font-weight:500;letter-spacing:-0.3px}
 .info-card a:hover{color:var(--green)}
 .info-card-icon{
@@ -553,29 +465,59 @@ img,video{max-width:100%;height:auto;display:block}
 }
 .info-card-icon svg{width:20px;height:20px;stroke:var(--green);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .info-card-label{font-size:11px;font-weight:600;color:var(--gray);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:2px}
-
-/* Tel info card highlight */
-.info-card.tel-highlight{
-  border-color:rgba(52,209,108,0.3);
-  background:linear-gradient(135deg,white 0%,rgba(52,209,108,0.03) 100%);
-}
-.info-card.tel-highlight a{
-  font-size:18px;font-weight:700;color:var(--dark);letter-spacing:-0.5px;
-}
-.info-card.tel-highlight a:hover{color:var(--green)}
+.info-card-value{font-size:15px;font-weight:700;color:var(--dark);letter-spacing:-0.3px}
 
 /* ─── FAQ ─── */
 .faq-section{width:100%;margin-top:75px;padding:0 16px}
-.faq-title{font-size:26px;font-weight:700;color:var(--dark);letter-spacing:-0.9px;margin-bottom:8px}
-.faq-sub{font-size:15px;color:var(--gray);margin-bottom:28px;letter-spacing:-0.3px}
-.faq-item{border-bottom:1px solid var(--border);animation:fadeInUp .5s ease-out both}
-.faq-q{display:flex;justify-content:space-between;align-items:center;padding:16px 0;cursor:pointer;gap:10px}
+.faq-header{text-align:center;margin-bottom:32px}
+.faq-title{
+  font-size:26px;font-weight:700;color:var(--dark);
+  letter-spacing:-0.9px;margin-bottom:8px;text-align:center;
+}
+.faq-discover{
+  font-size:15px;font-weight:500;color:var(--gray);
+  margin-bottom:4px;text-align:center;letter-spacing:-0.3px;
+}
+.faq-sub{font-size:15px;color:var(--gray);margin-bottom:0;letter-spacing:-0.3px;text-align:center}
+
+/* Frosted glass FAQ container */
+.faq-container{
+  background:rgba(255,255,255,0.55);
+  backdrop-filter:blur(14px) saturate(180%);
+  -webkit-backdrop-filter:blur(14px) saturate(180%);
+  border:1.5px solid rgba(255,255,255,0.7);
+  border-radius:24px;
+  padding:12px 20px 4px;
+  box-shadow:0 4px 32px rgba(0,0,0,0.07), inset 0 1px 0 rgba(255,255,255,0.9);
+  position:relative;overflow:hidden;
+}
+.faq-container::before{
+  content:'';position:absolute;inset:0;border-radius:24px;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events:none;opacity:0.6;
+}
+.faq-item{
+  border-bottom:1px solid rgba(229,229,234,0.7);
+  animation:fadeInUp .5s ease-out both;
+}
+.faq-item:last-child{border-bottom:none}
+.faq-q{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:16px 0;cursor:pointer;gap:10px;
+}
 .faq-q-text{font-size:15px;font-weight:500;color:var(--dark);letter-spacing:-0.3px;line-height:1.3}
-.faq-arrow{width:24px;height:24px;border-radius:50%;background:#F0F0F0;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .25s,background .2s}
+.faq-arrow{
+  width:24px;height:24px;border-radius:50%;background:#F0F0F0;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  transition:transform .25s,background .2s;
+}
 .faq-arrow svg{width:14px;height:14px;stroke:var(--dark);stroke-width:2;fill:none;transition:transform .25s}
 .faq-item.open .faq-arrow{background:var(--green-light)}
 .faq-item.open .faq-arrow svg{transform:rotate(180deg);stroke:var(--green)}
-.faq-a{font-size:14px;color:var(--gray);line-height:1.5;letter-spacing:-0.2px;padding-bottom:16px;display:none}
+.faq-a{
+  font-size:14px;color:var(--gray);line-height:1.5;letter-spacing:-0.2px;
+  padding-bottom:16px;display:none;
+}
 .faq-item.open .faq-a{display:block}
 
 /* ─── Final CTA Banner ─── */
@@ -584,8 +526,14 @@ img,video{max-width:100%;height:auto;display:block}
   background:white;text-align:center;
   border-top:1px solid var(--border);
 }
-.final-cta-title{font-size:26px;font-weight:700;color:var(--dark);letter-spacing:-0.9px;margin-bottom:10px;line-height:1.2}
-.final-cta-sub{font-size:15px;color:var(--gray);margin-bottom:28px;letter-spacing:-0.3px;line-height:1.4}
+.final-cta-title{
+  font-size:26px;font-weight:700;color:var(--dark);
+  letter-spacing:-0.9px;margin-bottom:10px;line-height:1.3;
+}
+.final-cta-sub{
+  font-size:15px;color:var(--gray);margin-bottom:28px;
+  letter-spacing:-0.3px;line-height:1.7;max-width:340px;margin-left:auto;margin-right:auto;
+}
 .final-cta-btn{
   display:inline-flex;align-items:center;gap:8px;
   background:var(--dark);color:white;border-radius:14px;
@@ -602,15 +550,17 @@ img,video{max-width:100%;height:auto;display:block}
   border-top:1px solid var(--border);
   padding:40px 20px;
   display:flex;flex-direction:column;gap:24px;
+  align-items:center;text-align:center;
 }
 .footer-brand{font-size:18px;font-weight:700;color:var(--dark);letter-spacing:-0.6px}
 .footer-brand span{color:var(--green)}
-.footer-links{display:flex;flex-wrap:wrap;gap:16px}
-.footer-links a{font-size:13px;color:var(--gray);letter-spacing:-0.2px;transition:color .2s}
+.footer-links{display:flex;flex-wrap:wrap;gap:16px;justify-content:center}
+.footer-links a{font-size:13px;color:#333;letter-spacing:-0.2px;transition:color .2s}
 .footer-links a:hover{color:var(--dark)}
-.footer-copy{font-size:12px;color:var(--gray);letter-spacing:-0.2px}
-.footer-contact{display:flex;flex-direction:column;gap:6px}
-.footer-contact a{font-size:13px;color:var(--gray);transition:color .2s}
+.footer-copy{font-size:12px;color:#333;letter-spacing:-0.2px}
+.footer-credit{font-size:12px;color:#333;letter-spacing:-0.2px;margin-top:4px}
+.footer-contact{display:flex;flex-direction:column;gap:6px;align-items:center}
+.footer-contact a{font-size:13px;color:#333;transition:color .2s}
 .footer-contact a:hover{color:var(--green)}
 
 /* ─── Floating Action Button ─── */
@@ -634,8 +584,6 @@ img,video{max-width:100%;height:auto;display:block}
   .stats-inner{grid-template-columns:repeat(4,1fr)}
   .demo-cards-row{flex-wrap:nowrap}
   .pill-label{font-size:13px}
-  .pricing-cards{flex-direction:row;align-items:stretch}
-  .pricing-card{flex:1}
 }
 @media(min-width:768px){
   .hero-h1{font-size:48px;width:70%}
@@ -650,6 +598,92 @@ img,video{max-width:100%;height:auto;display:block}
 .reveal-left.visible{opacity:1;transform:none}
 .reveal-right{opacity:0;transform:translateX(30px);transition:opacity .6s ease,transform .6s ease}
 .reveal-right.visible{opacity:1;transform:none}
+
+/* ─── Hover glow cards effect ─── */
+.glow-card{
+  position:relative;transition:transform .3s ease,box-shadow .3s ease;
+}
+.glow-card::after{
+  content:'';position:absolute;inset:-1px;border-radius:inherit;
+  background:linear-gradient(135deg,rgba(52,209,108,0.15),transparent,rgba(52,209,108,0.08));
+  opacity:0;transition:opacity .3s ease;pointer-events:none;
+}
+.glow-card:hover::after{opacity:1}
+
+/* ─── Pricing Section ─── */
+.pricing-section{
+  width:100%;margin-top:75px;padding:0 16px 10px;
+}
+.pricing-header{text-align:center;margin-bottom:32px}
+.pricing-tag{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(52,209,108,0.1);border-radius:20px;padding:4px 14px;margin-bottom:12px;
+}
+.pricing-tag span{font-size:12px;font-weight:600;color:var(--green);letter-spacing:0.5px;text-transform:uppercase}
+.pricing-title{
+  font-size:26px;font-weight:700;color:var(--dark);letter-spacing:-0.9px;line-height:1.2;margin-bottom:10px;
+}
+.pricing-sub{
+  font-size:15px;color:var(--gray);letter-spacing:-0.3px;line-height:1.6;
+  max-width:340px;margin:0 auto;
+}
+.pricing-cards{display:flex;flex-direction:column;gap:16px}
+.pricing-card{
+  background:white;border:1.5px solid var(--border);border-radius:20px;padding:24px;
+  display:flex;flex-direction:column;gap:16px;
+  box-shadow:0 2px 12px rgba(0,0,0,0.04);
+  transition:transform .3s ease,box-shadow .3s ease,border-color .3s;
+}
+.pricing-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(52,209,108,0.10);border-color:rgba(52,209,108,0.35)}
+.pricing-card.featured{
+  background:var(--dark);border-color:var(--dark);
+}
+.pricing-card.devis{
+  background:linear-gradient(135deg,var(--dark) 0%,#2d2d2e 100%);
+  border-color:var(--green);
+  box-shadow:0 0 0 1px var(--green), 0 8px 32px rgba(52,209,108,0.18);
+}
+.pricing-card-name{font-size:13px;font-weight:600;color:var(--gray);text-transform:uppercase;letter-spacing:0.8px}
+.pricing-card.featured .pricing-card-name,
+.pricing-card.devis .pricing-card-name{color:rgba(255,255,255,0.5)}
+.pricing-card-price{font-size:36px;font-weight:700;color:var(--dark);letter-spacing:-1.5px;line-height:1}
+.pricing-card.featured .pricing-card-price,
+.pricing-card.devis .pricing-card-price{color:white}
+.pricing-card-period{font-size:14px;font-weight:400;color:var(--gray);letter-spacing:0}
+.pricing-card.featured .pricing-card-period,
+.pricing-card.devis .pricing-card-period{color:rgba(255,255,255,0.5)}
+.pricing-card-desc{font-size:13px;color:var(--gray);line-height:1.6;letter-spacing:-0.2px}
+.pricing-card.featured .pricing-card-desc,
+.pricing-card.devis .pricing-card-desc{color:rgba(255,255,255,0.6)}
+.pricing-card-title-big{
+  font-size:22px;font-weight:700;color:white;letter-spacing:-0.8px;line-height:1.2;
+}
+.pricing-features{display:flex;flex-direction:column;gap:8px}
+.pricing-feat{display:flex;align-items:flex-start;gap:8px;font-size:13px;color:var(--dark);letter-spacing:-0.2px}
+.pricing-card.featured .pricing-feat,
+.pricing-card.devis .pricing-feat{color:rgba(255,255,255,0.85)}
+.pricing-feat-check{
+  width:18px;height:18px;border-radius:50%;background:var(--green-light);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;
+}
+.pricing-card.featured .pricing-feat-check,
+.pricing-card.devis .pricing-feat-check{background:rgba(52,209,108,0.2)}
+.pricing-feat-check svg{width:10px;height:10px;stroke:var(--green);fill:none;stroke-width:2.5;stroke-linecap:round}
+.pricing-btn{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  border-radius:14px;padding:12px 20px;font-size:14px;font-weight:600;
+  transition:transform .2s,box-shadow .2s;letter-spacing:-0.3px;
+  border:1.5px solid var(--border);color:var(--dark);background:white;
+}
+.pricing-btn:hover{transform:scale(1.03);box-shadow:0 4px 16px rgba(0,0,0,0.1)}
+.pricing-btn-dark{
+  background:var(--dark);color:white;border-color:var(--dark);
+}
+.pricing-btn-green{
+  background:var(--green);color:white;border-color:var(--green);
+  box-shadow:0 0 12px rgba(52,209,108,0.3);
+  animation:glowPulse 3s ease-in-out infinite;
+}
 </style>
 </head>
 <body>
@@ -658,63 +692,25 @@ img,video{max-width:100%;height:auto;display:block}
 <nav class="nav-wrapper">
   <div class="nav-inner">
     <div class="nav-row">
-      <div class="nav-logo">Alpha<span>Korner</span></div>
-
-      <!-- Nav links center -->
-      <div class="nav-links">
-        <!-- Features dropdown -->
-        <div class="nav-dropdown-wrap">
-          <button class="nav-link has-dropdown">
-            Nos solutions
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-          <div class="nav-dropdown">
-            <a href="#features" class="nav-dropdown-item" onclick="document.getElementById('features').scrollIntoView({behavior:'smooth'});return false">
-              <div class="nav-dropdown-item-icon">
-                <svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-              </div>
-              <div class="nav-dropdown-item-text">
-                <div class="nav-dropdown-item-label">Développement web</div>
-                <div class="nav-dropdown-item-sub">Apps sur mesure & interfaces</div>
-              </div>
-            </a>
-            <a href="#features" class="nav-dropdown-item" onclick="document.getElementById('features').scrollIntoView({behavior:'smooth'});return false">
-              <div class="nav-dropdown-item-icon">
-                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-              </div>
-              <div class="nav-dropdown-item-text">
-                <div class="nav-dropdown-item-label">Automatisation</div>
-                <div class="nav-dropdown-item-sub">Workflows & intégrations</div>
-              </div>
-            </a>
-            <a href="#features" class="nav-dropdown-item" onclick="document.getElementById('features').scrollIntoView({behavior:'smooth'});return false">
-              <div class="nav-dropdown-item-icon">
-                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-              </div>
-              <div class="nav-dropdown-item-text">
-                <div class="nav-dropdown-item-label">Gamification & Marketing</div>
-                <div class="nav-dropdown-item-sub">Roues, QR codes, Link in bio</div>
-              </div>
-            </a>
-          </div>
-        </div>
-
-        <a href="#pricing" class="nav-link" onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'});return false">Tarifs</a>
-
-        <a href="#contact" class="nav-link" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'});return false">Contact</a>
-      </div>
-
-      <!-- Right actions -->
-      <div class="nav-actions">
-        <a href="tel:+33353630332" class="nav-tel">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.38 2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.81a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-          <span class="tel-label">03.53.63.03.32</span>
-        </a>
-        <a href="#contact" class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'});return false">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-          Nous contacter
-        </a>
-      </div>
+      <!-- Logo AK type altimètre -->
+      <a href="#" class="nav-logo-svg">
+        <svg class="ak-logo-mark" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Cercle extérieur -->
+          <circle cx="19" cy="19" r="18" stroke="#1D1D1E" stroke-width="2.5"/>
+          <!-- Barre verticale (le d) -->
+          <rect x="24" y="6" width="3.5" height="22" rx="1.75" fill="#34D16C"/>
+          <!-- Boucle du a -->
+          <path d="M24 19C24 22.866 20.866 26 17 26C13.134 26 10 22.866 10 19C10 15.134 13.134 12 17 12C20.866 12 24 15.134 24 19Z" stroke="#1D1D1E" stroke-width="2.5"/>
+          <!-- Trou intérieur du a -->
+          <circle cx="17" cy="19" r="4" fill="white"/>
+          <circle cx="17" cy="19" r="4" fill="white"/>
+        </svg>
+        <div class="ak-logo-wordmark">Alpha<span>Korner</span></div>
+      </a>
+      <a href="#contact" class="nav-cta">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+        Nous contacter
+      </a>
     </div>
   </div>
 </nav>
@@ -757,11 +753,11 @@ img,video{max-width:100%;height:auto;display:block}
         <div class="pills-row">
           <button class="pill active" onclick="showDemo(this,'dev')">
             <span class="pill-dot-wrap active"><span class="pill-dot active"></span></span>
-            <span class="pill-label">Développement web</span>
+            <span class="pill-label">Développement</span>
           </button>
           <button class="pill" onclick="showDemo(this,'crm')">
             <span class="pill-dot-wrap inactive"><span class="pill-dot inactive"></span></span>
-            <span class="pill-label">CRM & ERP sur mesure</span>
+            <span class="pill-label">CRM &amp; ERP sur mesure</span>
           </button>
         </div>
         <div class="pills-row">
@@ -771,7 +767,7 @@ img,video{max-width:100%;height:auto;display:block}
           </button>
           <button class="pill" onclick="showDemo(this,'mobile')">
             <span class="pill-dot-wrap inactive"><span class="pill-dot inactive"></span></span>
-            <span class="pill-label">Applications mobiles</span>
+            <span class="pill-label">Engagement &amp; Gamification</span>
           </button>
         </div>
       </div>
@@ -786,17 +782,23 @@ img,video{max-width:100%;height:auto;display:block}
           <div class="demo-card-sub">Interfaces modernes, performantes et adaptées à votre métier. Du prototype à la mise en production.</div>
           <div class="demo-cards-row">
             <div class="demo-mini-card">
-              <div class="demo-mini-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg></div>
+              <div class="demo-mini-icon">
+                <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+              </div>
               <div class="demo-mini-label">Performance</div>
               <div class="demo-mini-value">99<span style="font-size:14px;color:var(--green)">%</span></div>
             </div>
             <div class="demo-mini-card">
-              <div class="demo-mini-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div>
+              <div class="demo-mini-icon">
+                <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+              </div>
               <div class="demo-mini-label">Sécurité</div>
               <div class="demo-mini-value">A<span style="font-size:14px;color:var(--green)">+</span></div>
             </div>
             <div class="demo-mini-card">
-              <div class="demo-mini-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></div>
+              <div class="demo-mini-icon">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              </div>
               <div class="demo-mini-label">Délai moyen</div>
               <div class="demo-mini-value">4<span style="font-size:14px;color:var(--green)">sem</span></div>
             </div>
@@ -807,16 +809,20 @@ img,video{max-width:100%;height:auto;display:block}
           <div class="demo-icon" style="animation-name:floatCard2">
             <svg viewBox="0 0 24 24" fill="white"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
           </div>
-          <div class="demo-card-title">CRM & ERP personnalisés</div>
+          <div class="demo-card-title">CRM &amp; ERP personnalisés</div>
           <div class="demo-card-sub">Gérez vos clients, vos ventes et vos processus avec un outil calqué sur votre réalité terrain.</div>
           <div class="demo-cards-row">
             <div class="demo-mini-card">
-              <div class="demo-mini-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg></div>
+              <div class="demo-mini-icon">
+                <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
+              </div>
               <div class="demo-mini-label">Clients gérés</div>
               <div class="demo-mini-value">∞</div>
             </div>
             <div class="demo-mini-card">
-              <div class="demo-mini-icon"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg></div>
+              <div class="demo-mini-icon">
+                <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+              </div>
               <div class="demo-mini-label">Gain productivité</div>
               <div class="demo-mini-value">+40<span style="font-size:14px;color:var(--green)">%</span></div>
             </div>
@@ -833,29 +839,102 @@ img,video{max-width:100%;height:auto;display:block}
 
         <div class="demo-card" id="demo-mobile" style="display:none">
           <div class="demo-icon">
-            <svg viewBox="0 0 24 24" fill="white"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+            <svg viewBox="0 0 24 24" fill="white"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
           </div>
-          <div class="demo-card-title">Applications mobiles</div>
-          <div class="demo-card-sub">iOS et Android natifs ou hybrides. Une expérience utilisateur soignée sur tous les appareils.</div>
+          <div class="demo-card-title">Engagement &amp; Gamification</div>
+          <div class="demo-card-sub">Roues à prizes, programmes de fidélité, QR codes — des outils ludiques pour engager vos clients.</div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- ─── Trust ─── -->
+  <!-- ─── Trust / Partner Logos Scroll ─── -->
   <div class="trust-section reveal">
-    <div class="trust-avatars">
-      <div class="trust-avatar">M</div>
-      <div class="trust-avatar" style="background:linear-gradient(135deg,#4facfe,#00f2fe)">S</div>
-      <div class="trust-avatar" style="background:linear-gradient(135deg,#43e97b,#38f9d7)">A</div>
-      <div class="trust-avatar" style="background:linear-gradient(135deg,#fa709a,#fee140)">R</div>
-    </div>
     <p class="trust-label">Ils nous font confiance, <strong>entreprises et créateurs</strong></p>
+
+    <div class="logos-scroll-outer">
+      <div class="logos-scroll-track" id="logoTrack">
+        <!-- Set 1 -->
+        <div class="logo-bubble" title="Shopify">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M15.5 4.5c-.4-1.2-1.5-2-2.8-2-.1 0-.2 0-.3 0l-.4-1.3c0-.1-.1-.2-.2-.2H9.2c-.1 0-.2.1-.2.2l-.3 1C7.3 2.5 6.5 3.6 6.5 4.8c0 .1 0 .2 0 .3L5 5.5c-.3.1-.5.3-.5.6l1 13.5c0 .3.2.4.5.4H18c.3 0 .5-.2.5-.4l1-13.5c0-.3-.2-.5-.5-.6l-3.5-.5z" fill="#95BF47"/><path d="M13 3c.1 0 .2.1.2.2l.3 1H12l.5-1.1c.2-.1.3-.1.5-.1zm-3 8l.5-4H12l-.5 4H10zm4 0h-1.5l.5-4H15l-1 4z" fill="#5E8E3E"/></svg>
+        </div>
+        <div class="logo-bubble" title="Instagram">
+          <svg viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="url(#ig-grad)" stroke-width="2"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" stroke="url(#ig-grad)" stroke-width="2"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="url(#ig-grad)" stroke-width="2" stroke-linecap="round"/><defs><linearGradient id="ig-grad" x1="2" y1="22" x2="22" y2="2" gradientUnits="userSpaceOnUse"><stop stop-color="#F58529"/><stop offset=".5" stop-color="#DD2A7B"/><stop offset="1" stop-color="#515BD4"/></linearGradient></defs></svg>
+        </div>
+        <div class="logo-bubble" title="TikTok">
+          <svg viewBox="0 0 24 24" fill="#1D1D1E"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.19 8.19 0 0 0 4.77 1.52V6.77a4.85 4.85 0 0 1-1-.08z"/></svg>
+        </div>
+        <div class="logo-bubble" title="YouTube">
+          <svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.4a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z" fill="#FF0000"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="white"/></svg>
+        </div>
+        <div class="logo-bubble" title="Meta">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M3 8.5c0-1.5 1-2.5 2.5-2.5 1 0 2 .7 3 2L12 12l3.5-4c1-1.3 2-2 3-2C20 6 21 7 21 8.5c0 2-2 5-4.5 7.5L12 20l-4.5-4C5 13.5 3 10.5 3 8.5z" stroke="#0866FF" stroke-width="2" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="logo-bubble" title="Stripe">
+          <svg viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="12" fill="#635BFF" opacity=".12"/><path d="M11.4 9.2c0-.7.6-1 1.5-1 1.4 0 2.8.4 3.8 1V6c-1-.4-2.5-.7-3.8-.7-3.1 0-5.2 1.6-5.2 4.3 0 4.2 5.8 3.5 5.8 5.3 0 .8-.7 1.1-1.7 1.1-1.4 0-3-.6-4.2-1.4v3.3c1.4.6 2.8.9 4.2.9 3.2 0 5.4-1.6 5.4-4.3-.1-4.5-5.8-3.7-5.8-5.3z" fill="#635BFF"/></svg>
+        </div>
+        <div class="logo-bubble" title="Notion">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M4 4h16v16H4z" rx="2" fill="white" stroke="#E5E5EA" stroke-width="1"/><path d="M8 8h8M8 12h8M8 16h5" stroke="#1D1D1E" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <div class="logo-bubble" title="Zapier">
+          <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#FF4A00" opacity=".1"/><path d="M12 4l1.8 5.6H20l-4.9 3.6 1.9 5.6L12 15.2 7 18.8l1.9-5.6L4 9.6h6.2z" fill="#FF4A00"/></svg>
+        </div>
+        <div class="logo-bubble" title="HubSpot">
+          <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3" fill="#FF7A59"/><path d="M17 16a5 5 0 1 1-10 0 5 5 0 0 1 10 0z" fill="#FF7A59" opacity=".3"/><line x1="12" y1="11" x2="12" y2="13" stroke="#FF7A59" stroke-width="2"/></svg>
+        </div>
+        <div class="logo-bubble" title="Salesforce">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M12 5a4 4 0 0 1 3.8 2.7A3.5 3.5 0 0 1 19.5 11a3.5 3.5 0 0 1-1.5 6.5H7a4 4 0 0 1-.5-8 4 4 0 0 1 5.5-4.5z" fill="#00A1E0"/></svg>
+        </div>
+        <div class="logo-bubble" title="Google">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M22 12c0-1-.1-2-.3-2.9H12v5.5h5.6a4.8 4.8 0 0 1-2.1 3.1v2.6h3.4C21 18.4 22 15.4 22 12z" fill="#4285F4"/><path d="M12 23c2.7 0 5-.9 6.7-2.4l-3.4-2.6a7 7 0 0 1-3.3.9 7 7 0 0 1-6.6-4.8H2v2.7A11 11 0 0 0 12 23z" fill="#34A853"/><path d="M5.4 14.1A7 7 0 0 1 5 12a7 7 0 0 1 .4-2.1V7.2H2A11 11 0 0 0 1 12a11 11 0 0 0 1 4.8l3.4-2.7z" fill="#FBBC05"/><path d="M12 5a7 7 0 0 1 5 2l3.5-3.5A11 11 0 0 0 12 1a11 11 0 0 0-10 5.8l3.4 2.7A7 7 0 0 1 12 5z" fill="#EA4335"/></svg>
+        </div>
+        <div class="logo-bubble" title="Slack">
+          <svg viewBox="0 0 24 24" fill="none"><rect x="8" y="2" width="3" height="9" rx="1.5" fill="#E01E5A"/><rect x="13" y="13" width="3" height="9" rx="1.5" fill="#36C5F0"/><rect x="2" y="13" width="9" height="3" rx="1.5" fill="#2EB67D"/><rect x="13" y="8" width="9" height="3" rx="1.5" fill="#ECB22E"/></svg>
+        </div>
+        <!-- Set 2 (duplicate for seamless loop) -->
+        <div class="logo-bubble" title="Shopify">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M15.5 4.5c-.4-1.2-1.5-2-2.8-2-.1 0-.2 0-.3 0l-.4-1.3c0-.1-.1-.2-.2-.2H9.2c-.1 0-.2.1-.2.2l-.3 1C7.3 2.5 6.5 3.6 6.5 4.8c0 .1 0 .2 0 .3L5 5.5c-.3.1-.5.3-.5.6l1 13.5c0 .3.2.4.5.4H18c.3 0 .5-.2.5-.4l1-13.5c0-.3-.2-.5-.5-.6l-3.5-.5z" fill="#95BF47"/><path d="M13 3c.1 0 .2.1.2.2l.3 1H12l.5-1.1c.2-.1.3-.1.5-.1zm-3 8l.5-4H12l-.5 4H10zm4 0h-1.5l.5-4H15l-1 4z" fill="#5E8E3E"/></svg>
+        </div>
+        <div class="logo-bubble" title="Instagram">
+          <svg viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="url(#ig-grad2)" stroke-width="2"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" stroke="url(#ig-grad2)" stroke-width="2"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="url(#ig-grad2)" stroke-width="2" stroke-linecap="round"/><defs><linearGradient id="ig-grad2" x1="2" y1="22" x2="22" y2="2" gradientUnits="userSpaceOnUse"><stop stop-color="#F58529"/><stop offset=".5" stop-color="#DD2A7B"/><stop offset="1" stop-color="#515BD4"/></linearGradient></defs></svg>
+        </div>
+        <div class="logo-bubble" title="TikTok">
+          <svg viewBox="0 0 24 24" fill="#1D1D1E"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.19 8.19 0 0 0 4.77 1.52V6.77a4.85 4.85 0 0 1-1-.08z"/></svg>
+        </div>
+        <div class="logo-bubble" title="YouTube">
+          <svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.4a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z" fill="#FF0000"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="white"/></svg>
+        </div>
+        <div class="logo-bubble" title="Meta">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M3 8.5c0-1.5 1-2.5 2.5-2.5 1 0 2 .7 3 2L12 12l3.5-4c1-1.3 2-2 3-2C20 6 21 7 21 8.5c0 2-2 5-4.5 7.5L12 20l-4.5-4C5 13.5 3 10.5 3 8.5z" stroke="#0866FF" stroke-width="2" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="logo-bubble" title="Stripe">
+          <svg viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="12" fill="#635BFF" opacity=".12"/><path d="M11.4 9.2c0-.7.6-1 1.5-1 1.4 0 2.8.4 3.8 1V6c-1-.4-2.5-.7-3.8-.7-3.1 0-5.2 1.6-5.2 4.3 0 4.2 5.8 3.5 5.8 5.3 0 .8-.7 1.1-1.7 1.1-1.4 0-3-.6-4.2-1.4v3.3c1.4.6 2.8.9 4.2.9 3.2 0 5.4-1.6 5.4-4.3-.1-4.5-5.8-3.7-5.8-5.3z" fill="#635BFF"/></svg>
+        </div>
+        <div class="logo-bubble" title="Notion">
+          <svg viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="16" height="16" rx="2" fill="white" stroke="#E5E5EA" stroke-width="1"/><path d="M8 8h8M8 12h8M8 16h5" stroke="#1D1D1E" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <div class="logo-bubble" title="Zapier">
+          <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#FF4A00" opacity=".1"/><path d="M12 4l1.8 5.6H20l-4.9 3.6 1.9 5.6L12 15.2 7 18.8l1.9-5.6L4 9.6h6.2z" fill="#FF4A00"/></svg>
+        </div>
+        <div class="logo-bubble" title="HubSpot">
+          <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3" fill="#FF7A59"/><path d="M17 16a5 5 0 1 1-10 0 5 5 0 0 1 10 0z" fill="#FF7A59" opacity=".3"/><line x1="12" y1="11" x2="12" y2="13" stroke="#FF7A59" stroke-width="2"/></svg>
+        </div>
+        <div class="logo-bubble" title="Salesforce">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M12 5a4 4 0 0 1 3.8 2.7A3.5 3.5 0 0 1 19.5 11a3.5 3.5 0 0 1-1.5 6.5H7a4 4 0 0 1-.5-8 4 4 0 0 1 5.5-4.5z" fill="#00A1E0"/></svg>
+        </div>
+        <div class="logo-bubble" title="Google">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M22 12c0-1-.1-2-.3-2.9H12v5.5h5.6a4.8 4.8 0 0 1-2.1 3.1v2.6h3.4C21 18.4 22 15.4 22 12z" fill="#4285F4"/><path d="M12 23c2.7 0 5-.9 6.7-2.4l-3.4-2.6a7 7 0 0 1-3.3.9 7 7 0 0 1-6.6-4.8H2v2.7A11 11 0 0 0 12 23z" fill="#34A853"/><path d="M5.4 14.1A7 7 0 0 1 5 12a7 7 0 0 1 .4-2.1V7.2H2A11 11 0 0 0 1 12a11 11 0 0 0 1 4.8l3.4-2.7z" fill="#FBBC05"/><path d="M12 5a7 7 0 0 1 5 2l3.5-3.5A11 11 0 0 0 12 1a11 11 0 0 0-10 5.8l3.4 2.7A7 7 0 0 1 12 5z" fill="#EA4335"/></svg>
+        </div>
+        <div class="logo-bubble" title="Slack">
+          <svg viewBox="0 0 24 24" fill="none"><rect x="8" y="2" width="3" height="9" rx="1.5" fill="#E01E5A"/><rect x="13" y="13" width="3" height="9" rx="1.5" fill="#36C5F0"/><rect x="2" y="13" width="9" height="3" rx="1.5" fill="#2EB67D"/><rect x="13" y="8" width="9" height="3" rx="1.5" fill="#ECB22E"/></svg>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- ─── Stats ─── -->
   <div class="stats-section reveal">
-    <p class="stats-headline">Conçu pour les entreprises et les équipes qui veulent des résultats concrets et une interface soignée.</p>
+    <p class="stats-headline">Conçu pour les entreprises et les équipes<br>qui veulent des résultats concrets<br>et une interface soignée.</p>
     <div class="stats-inner">
       <div class="stat-item">
         <div class="stat-value">98<span class="stat-unit">%</span></div>
@@ -877,8 +956,9 @@ img,video{max-width:100%;height:auto;display:block}
   </div>
 
   <!-- ─── Features ─── -->
-  <div class="features-section" id="features">
+  <div class="features-section">
 
+    <!-- Feature 1 : Dev -->
     <div class="feature-block reveal">
       <div class="feature-eyebrow">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
@@ -886,27 +966,33 @@ img,video{max-width:100%;height:auto;display:block}
       </div>
       <h2 class="feature-h2">Des applications <em>faites pour vous</em>, pas pour tout le monde.</h2>
       <p class="feature-desc">Chaque logiciel Alpha Korner est conçu spécifiquement pour votre activité. Pas de template générique, pas de fonctionnalités inutiles. Juste ce dont vous avez besoin, parfaitement exécuté.</p>
-      <a href="#contact" class="feature-link" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'});return false">
+      <a href="#contact" class="feature-link">
         Discuter de votre projet
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
       </a>
       <div class="feat-cards">
         <div class="feat-card">
-          <div class="feat-card-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
+          <div class="feat-card-icon">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          </div>
           <div class="feat-card-body">
-            <div class="feat-card-title">Interface moderne & responsive</div>
+            <div class="feat-card-title">Interface moderne &amp; responsive</div>
             <div class="feat-card-desc">Vos utilisateurs arrivent sur une interface claire, fluide et optimisée sur tous les écrans.</div>
           </div>
         </div>
         <div class="feat-card">
-          <div class="feat-card-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <div class="feat-card-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
           <div class="feat-card-body">
-            <div class="feat-card-title">Sécurité & hébergement inclus</div>
+            <div class="feat-card-title">Sécurité &amp; hébergement inclus</div>
             <div class="feat-card-desc">Architecture sécurisée, HTTPS, sauvegardes automatiques. Vous dormez tranquille.</div>
           </div>
         </div>
         <div class="feat-card">
-          <div class="feat-card-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+          <div class="feat-card-icon">
+            <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
           <div class="feat-card-body">
             <div class="feat-card-title">Performance optimisée</div>
             <div class="feat-card-desc">Temps de chargement minimal, score Lighthouse 90+, expérience utilisateur impeccable.</div>
@@ -915,6 +1001,7 @@ img,video{max-width:100%;height:auto;display:block}
       </div>
     </div>
 
+    <!-- Feature 2 : Automatisation -->
     <div class="feature-block reveal">
       <div class="feature-eyebrow">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
@@ -922,20 +1009,24 @@ img,video{max-width:100%;height:auto;display:block}
       </div>
       <h2 class="feature-h2">Supprimez les tâches répétitives. <em>Concentrez-vous sur l'essentiel.</em></h2>
       <p class="feature-desc">Vos équipes passent trop de temps sur des opérations manuelles ? Alpha Korner automatise vos processus métier pour que votre énergie soit investie là où elle crée vraiment de la valeur.</p>
-      <a href="#contact" class="feature-link" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'});return false">
+      <a href="#contact" class="feature-link">
         Voir comment ça fonctionne
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
       </a>
       <div class="feat-cards">
         <div class="feat-card">
-          <div class="feat-card-icon"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div>
+          <div class="feat-card-icon">
+            <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+          </div>
           <div class="feat-card-body">
-            <div class="feat-card-title">Intégrations & API</div>
+            <div class="feat-card-title">Intégrations &amp; API</div>
             <div class="feat-card-desc">Connectez vos outils existants. Salesforce, HubSpot, Zapier, ou votre propre ERP.</div>
           </div>
         </div>
         <div class="feat-card">
-          <div class="feat-card-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+          <div class="feat-card-icon">
+            <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
           <div class="feat-card-body">
             <div class="feat-card-title">Workflows automatiques</div>
             <div class="feat-card-desc">Devis, factures, relances, notifications. Chaque étape se déclenche automatiquement.</div>
@@ -944,29 +1035,34 @@ img,video{max-width:100%;height:auto;display:block}
       </div>
     </div>
 
+    <!-- Feature 3 : Gamification B2B -->
     <div class="feature-block reveal">
       <div class="feature-eyebrow">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-        <span>Engagement & Gamification</span>
+        <span>Engagement &amp; Gamification</span>
       </div>
       <h2 class="feature-h2">Fidélisez vos clients avec des <em>expériences interactives.</em></h2>
       <p class="feature-desc">Roues à prizes, programmes de fidélité, QR codes promotionnels, link in bio personnalisés… Alpha Korner conçoit des outils d'engagement sur mesure pour restaurants, commerces et créateurs.</p>
-      <a href="#contact" class="feature-link" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'});return false">
+      <a href="#contact" class="feature-link">
         Découvrir nos outils marketing
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
       </a>
       <div class="feat-cards">
         <div class="feat-card">
-          <div class="feat-card-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
+          <div class="feat-card-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+          </div>
           <div class="feat-card-body">
-            <div class="feat-card-title">Roue à prizes & jeux concours</div>
+            <div class="feat-card-title">Roue à prizes &amp; jeux concours</div>
             <div class="feat-card-desc">Augmentez l'engagement et les visites en magasin grâce à des animations ludiques et personnalisées.</div>
           </div>
         </div>
         <div class="feat-card">
-          <div class="feat-card-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg></div>
+          <div class="feat-card-icon">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg>
+          </div>
           <div class="feat-card-body">
-            <div class="feat-card-title">QR codes & Link in bio</div>
+            <div class="feat-card-title">QR codes &amp; Link in bio</div>
             <div class="feat-card-desc">Des liens intelligents et des QR codes à votre image, avec tableau de bord et analytics intégrés.</div>
           </div>
         </div>
@@ -976,70 +1072,62 @@ img,video{max-width:100%;height:auto;display:block}
   </div>
 
   <!-- ─── Pricing ─── -->
-  <div class="pricing-section reveal" id="pricing">
+  <div class="pricing-section reveal" id="tarifs">
     <div class="pricing-header">
-      <div class="pricing-eyebrow">
+      <div class="pricing-tag">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
         <span>Tarifs SaaS</span>
       </div>
-      <h2 class="pricing-title">Des formules claires,<br>sans mauvaise surprise.</h2>
-      <p class="pricing-sub">Choisissez la formule adaptée à votre activité. Devis sur mesure disponible pour les projets complexes.</p>
+      <h2 class="pricing-title">Choisissez votre formule</h2>
+      <p class="pricing-sub">Choisissez la formule adaptée à votre activité.<br>Devis sur mesure disponible<br>pour les projets complexes.</p>
     </div>
-
     <div class="pricing-cards">
 
       <!-- Starter -->
-      <div class="pricing-card reveal">
-        <div class="pricing-plan">Starter</div>
-        <div class="pricing-price">
-          <span class="pricing-price-currency">€</span>
-          49<span class="pricing-price-period">/mois</span>
+      <div class="pricing-card">
+        <div class="pricing-card-name">Starter</div>
+        <div>
+          <span class="pricing-card-price">490<span class="pricing-card-period">€/mois</span></span>
         </div>
-        <p class="pricing-desc">Parfait pour les indépendants et petites structures qui veulent digitaliser rapidement.</p>
-        <hr class="pricing-divider">
+        <p class="pricing-card-desc">Parfait pour les indépendants<br>et petites structures qui veulent<br>digitaliser rapidement.</p>
         <div class="pricing-features">
-          <div class="pricing-feature"><div class="pricing-feature-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>1 application web</div>
-          <div class="pricing-feature"><div class="pricing-feature-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Jusqu'à 500 utilisateurs</div>
-          <div class="pricing-feature"><div class="pricing-feature-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Hébergement inclus</div>
-          <div class="pricing-feature"><div class="pricing-feature-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Support email 5j/7</div>
+          <div class="pricing-feat"><div class="pricing-feat-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>1 application web sur mesure</div>
+          <div class="pricing-feat"><div class="pricing-feat-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>Interface responsive &amp; moderne</div>
+          <div class="pricing-feat"><div class="pricing-feat-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>Hébergement inclus</div>
+          <div class="pricing-feat"><div class="pricing-feat-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>Support par email</div>
         </div>
-        <a href="tel:+33353630332" class="pricing-card-btn">Commencer →</a>
+        <a href="mailto:Contact@alphakorner.fr?subject=Pack Starter" class="pricing-btn pricing-btn-dark">Commencer →</a>
       </div>
 
-      <!-- Pro (featured) -->
-      <div class="pricing-card featured reveal">
-        <div class="pricing-badge">⭐ Le plus populaire</div>
-        <div class="pricing-plan">Pro</div>
-        <div class="pricing-price" style="color:white">
-          <span class="pricing-price-currency" style="color:white">€</span>
-          149<span class="pricing-price-period">/mois</span>
+      <!-- Pro -->
+      <div class="pricing-card featured">
+        <div class="pricing-card-name">Pro</div>
+        <div>
+          <span class="pricing-card-price" style="color:white">990<span class="pricing-card-period">€/mois</span></span>
         </div>
-        <p class="pricing-desc">Pour les PME et commerces qui veulent automatiser et engager leurs clients.</p>
-        <hr class="pricing-divider">
+        <p class="pricing-card-desc">Pour les PME et commerces<br>qui veulent automatiser<br>et engager leurs clients.</p>
         <div class="pricing-features">
-          <div class="pricing-feature"><div class="pricing-feature-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>3 applications web</div>
-          <div class="pricing-feature"><div class="pricing-feature-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Utilisateurs illimités</div>
-          <div class="pricing-feature"><div class="pricing-feature-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Roue à prizes & QR codes</div>
-          <div class="pricing-feature"><div class="pricing-feature-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Automatisations avancées</div>
-          <div class="pricing-feature"><div class="pricing-feature-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Support prioritaire 7j/7</div>
+          <div class="pricing-feat"><div class="pricing-feat-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>Tout Starter inclus</div>
+          <div class="pricing-feat"><div class="pricing-feat-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>CRM ou ERP intégré</div>
+          <div class="pricing-feat"><div class="pricing-feat-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>Automatisation des processus</div>
+          <div class="pricing-feat"><div class="pricing-feat-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>Outil gamification inclus</div>
+          <div class="pricing-feat"><div class="pricing-feat-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>Support prioritaire</div>
         </div>
-        <a href="tel:+33353630332" class="pricing-card-btn">Démarrer l'essai gratuit →</a>
+        <a href="mailto:Contact@alphakorner.fr?subject=Pack Pro" class="pricing-btn pricing-btn-green">Commencer →</a>
       </div>
 
-      <!-- Sur mesure -->
-      <div class="pricing-card reveal">
-        <div class="pricing-plan">Sur mesure</div>
-        <div class="pricing-price">
-          <span style="font-size:28px;font-weight:700;color:var(--dark);letter-spacing:-1px">Devis<br>gratuit</span>
-        </div>
-        <p class="pricing-desc">Pour les projets complexes, les ERP, CRM ou solutions multi-sites avec intégrations spécifiques.</p>
-        <hr class="pricing-divider">
+      <!-- Devis -->
+      <div class="pricing-card devis">
+        <div class="pricing-card-name">Entreprise</div>
+        <div class="pricing-card-title-big">Devis GRATUIT !</div>
+        <p class="pricing-card-desc">Pour les projets complexes,<br>les ERP, CRM ou solutions multi-sites<br>avec intégrations spécifiques.</p>
         <div class="pricing-features">
-          <div class="pricing-feature"><div class="pricing-feature-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Développement 100% sur mesure</div>
-          <div class="pricing-feature"><div class="pricing-feature-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Intégrations API tierces</div>
-          <div class="pricing-feature"><div class="pricing-feature-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Code livré — vous êtes propriétaire</div>
-          <div class="pricing-feature"><div class="pricing-feature-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Accompagnement dédié</div>
+          <div class="pricing-feat"><div class="pricing-feat-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>Architecture sur mesure</div>
+          <div class="pricing-feat"><div class="pricing-feat-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>Intégrations spécifiques</div>
+          <div class="pricing-feat"><div class="pricing-feat-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>Multi-sites &amp; scalabilité</div>
+          <div class="pricing-feat"><div class="pricing-feat-check"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></div>Accompagnement dédié</div>
         </div>
-        <a href="tel:+33353630332" class="pricing-card-btn">Nous appeler →</a>
+        <a href="mailto:Contact@alphakorner.fr?subject=Devis Entreprise" class="pricing-btn pricing-btn-green">Demander un devis →</a>
       </div>
 
     </div>
@@ -1047,12 +1135,13 @@ img,video{max-width:100%;height:auto;display:block}
 
   <!-- ─── Testimonial ─── -->
   <div class="testimonial-section reveal">
-    <p class="testimonial-label">Ce que disent nos clients</p>
+    <h2 class="testimonial-heading">Ils parlent <em>mieux que nous</em> 💬</h2>
+    <p class="testimonial-label">Témoignages de nos clients &amp; partenaires</p>
     <div class="testimonial-card">
       <div class="testimonial-stars">
         <span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span>
       </div>
-      <p class="testimonial-quote">« Alpha Korner a transformé notre façon de travailler. L'application est exactement ce qu'on voulait — intuitive, rapide et nos équipes l'ont adoptée dès le premier jour. C'est tellement rare de trouver une équipe qui comprend aussi bien nos besoins métier. »</p>
+      <p class="testimonial-quote">"Alpha Korner a transformé notre façon de travailler. L'application est exactement ce qu'on voulait — intuitive, rapide et nos équipes l'ont adoptée dès le premier jour. C'est tellement rare de trouver une équipe qui comprend aussi bien nos besoins métier."</p>
       <div class="testimonial-author">
         <div class="testimonial-avatar">M</div>
         <div>
@@ -1063,31 +1152,30 @@ img,video{max-width:100%;height:auto;display:block}
     </div>
   </div>
 
-  <!-- ─── Contact ─── -->
+  <!-- ─── Contact Info Cards ─── -->
   <div class="cta-section" id="contact">
     <div class="cta-block reveal">
       <div class="cta-block-title">Parlons de votre projet</div>
-      <p class="cta-block-sub">Un devis gratuit et une réponse sous 24h. Sans engagement, sans blabla.</p>
-      <div class="cta-block-actions">
-        <a href="mailto:Contact@alphakorner.fr" class="cta-block-btn">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          Envoyer un message
-        </a>
-        <a href="tel:+33353630332" class="cta-tel-btn">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.38 2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.81a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-          Appeler le 03.53.63.03.32
-        </a>
+      <p class="cta-block-sub">Un devis gratuit et une réponse sous 24h.<br>Sans engagement, sans blabla.</p>
+      <div style="display:flex;flex-direction:column;gap:10px;width:100%;align-items:center;z-index:1">
+        <div style="font-size:20px;font-weight:700;color:white;letter-spacing:-0.5px">📞 03.53.63.03.32</div>
+        <div style="font-size:15px;font-weight:700;color:rgba(255,255,255,0.9)">✉️ Contact@alphakorner.fr</div>
+        <div style="font-size:15px;font-weight:700;color:rgba(255,255,255,0.9)">📍 15 Route de Hausbergen, 67300 Schiltigheim</div>
       </div>
+      <a href="mailto:Contact@alphakorner.fr" class="cta-block-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        Envoyer un message
+      </a>
     </div>
 
     <div class="info-cards reveal">
-      <div class="info-card tel-highlight">
+      <div class="info-card">
         <div class="info-card-icon">
           <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.38 2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.81a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
         </div>
         <div>
-          <div class="info-card-label">📞 Appelez-nous directement</div>
-          <a href="tel:+33353630332">03.53.63.03.32</a>
+          <div class="info-card-label">Téléphone</div>
+          <div class="info-card-value"><a href="tel:+33353630332">03.53.63.03.32</a></div>
         </div>
       </div>
       <div class="info-card">
@@ -1096,7 +1184,7 @@ img,video{max-width:100%;height:auto;display:block}
         </div>
         <div>
           <div class="info-card-label">Email</div>
-          <a href="mailto:Contact@alphakorner.fr">Contact@alphakorner.fr</a>
+          <div class="info-card-value"><a href="mailto:Contact@alphakorner.fr">Contact@alphakorner.fr</a></div>
         </div>
       </div>
       <div class="info-card">
@@ -1105,7 +1193,7 @@ img,video{max-width:100%;height:auto;display:block}
         </div>
         <div>
           <div class="info-card-label">Adresse</div>
-          <a href="https://maps.google.com/?q=15+Route+de+Hausbergen+67300+Schiltigheim" target="_blank">15 Route de Hausbergen, 67300 Schiltigheim</a>
+          <div class="info-card-value"><a href="https://maps.google.com/?q=15+Route+de+Hausbergen+67300+Schiltigheim" target="_blank">15 Route de Hausbergen, 67300 Schiltigheim</a></div>
         </div>
       </div>
       <div class="info-card">
@@ -1114,7 +1202,7 @@ img,video{max-width:100%;height:auto;display:block}
         </div>
         <div>
           <div class="info-card-label">Site web</div>
-          <a href="https://alphaos67.github.io/Alpha-OS/" target="_blank">alphakorner.fr</a>
+          <div class="info-card-value"><a href="https://alphaos67.github.io/Alpha-OS/" target="_blank">alphakorner.fr</a></div>
         </div>
       </div>
     </div>
@@ -1122,93 +1210,104 @@ img,video{max-width:100%;height:auto;display:block}
 
   <!-- ─── FAQ ─── -->
   <div class="faq-section">
-    <h2 class="faq-title">Encore des questions ?</h2>
-    <p class="faq-sub">On a les réponses</p>
-
-    <div class="faq-item reveal">
-      <div class="faq-q" onclick="toggleFaq(this)">
-        <span class="faq-q-text">C'est quoi Alpha Korner ?</span>
-        <span class="faq-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
-      </div>
-      <div class="faq-a">Alpha Korner est une société strasbourgeoise spécialisée dans le développement de logiciels sur mesure, d'applications web et de solutions d'automatisation pour les entreprises et les commerces. Nous concevons des outils digitaux adaptés à votre réalité terrain.</div>
+    <div class="faq-header">
+      <h2 class="faq-title">Encore des questions ?</h2>
+      <p class="faq-discover">Découvrez notre foire aux questions.</p>
     </div>
-
-    <div class="faq-item reveal">
-      <div class="faq-q" onclick="toggleFaq(this)">
-        <span class="faq-q-text">À qui s'adresse Alpha Korner ?</span>
-        <span class="faq-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+    <div class="faq-container">
+      <div class="faq-item reveal">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">C'est quoi Alpha Korner ?</span>
+          <span class="faq-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+        </div>
+        <div class="faq-a">Alpha Korner est une société strasbourgeoise spécialisée dans le développement de logiciels sur mesure, d'applications web et de solutions d'automatisation pour les entreprises et les commerces. Nous concevons des outils digitaux adaptés à votre réalité terrain.</div>
       </div>
-      <div class="faq-a">Nos solutions s'adressent aux PME, commerces, restaurants, créateurs de contenus et toute structure souhaitant digitaliser ou automatiser ses processus. Nous travaillons aussi bien avec des startups qu'avec des entreprises établies.</div>
-    </div>
 
-    <div class="faq-item reveal">
-      <div class="faq-q" onclick="toggleFaq(this)">
-        <span class="faq-q-text">Combien coûte un projet ?</span>
-        <span class="faq-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+      <div class="faq-item reveal">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">À qui s'adresse Alpha Korner ?</span>
+          <span class="faq-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+        </div>
+        <div class="faq-a">Nos solutions s'adressent aux PME, commerces, restaurants, créateurs de contenus et toute structure souhaitant digitaliser ou automatiser ses processus. Nous travaillons aussi bien avec des startups qu'avec des entreprises établies.</div>
       </div>
-      <div class="faq-a">Chaque projet est unique. Nous proposons un devis gratuit et personnalisé après un premier échange. Les tarifs varient selon la complexité du projet. Nous proposons aussi des formules mensuelles pour les solutions SaaS et les outils en ligne.</div>
-    </div>
 
-    <div class="faq-item reveal">
-      <div class="faq-q" onclick="toggleFaq(this)">
-        <span class="faq-q-text">Quel est le délai de livraison ?</span>
-        <span class="faq-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+      <div class="faq-item reveal">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">Combien coûte un projet ?</span>
+          <span class="faq-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+        </div>
+        <div class="faq-a">Chaque projet est unique. Nous proposons un devis gratuit et personnalisé après un premier échange. Les tarifs varient selon la complexité du projet. Nous proposons aussi des formules mensuelles pour les solutions SaaS et les outils en ligne.</div>
       </div>
-      <div class="faq-a">Pour une application web standard, nous livrons une première version fonctionnelle en 3 à 6 semaines. Les projets plus complexes font l'objet d'un planning détaillé avec des jalons clairs. Nous sommes transparents sur les délais dès le départ.</div>
-    </div>
 
-    <div class="faq-item reveal">
-      <div class="faq-q" onclick="toggleFaq(this)">
-        <span class="faq-q-text">Puis-je garder la propriété du code ?</span>
-        <span class="faq-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+      <div class="faq-item reveal">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">Quel est le délai de livraison ?</span>
+          <span class="faq-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+        </div>
+        <div class="faq-a">Pour une application web standard, nous livrons une première version fonctionnelle en 3 à 6 semaines. Les projets plus complexes font l'objet d'un planning détaillé avec des jalons clairs. Nous sommes transparents sur les délais dès le départ.</div>
       </div>
-      <div class="faq-a">Oui, absolument. Tout le code produit par Alpha Korner vous appartient entièrement à la livraison. Vous n'êtes jamais dépendant de nous, même si nous restons disponibles pour la maintenance et les évolutions.</div>
-    </div>
 
-    <div class="faq-item reveal">
-      <div class="faq-q" onclick="toggleFaq(this)">
-        <span class="faq-q-text">Comment vous contacter ?</span>
-        <span class="faq-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+      <div class="faq-item reveal">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">Puis-je garder la propriété du code ?</span>
+          <span class="faq-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+        </div>
+        <div class="faq-a">Oui, absolument. Tout le code produit par Alpha Korner vous appartient entièrement à la livraison. Vous n'êtes jamais dépendant de nous, même si nous restons disponibles pour la maintenance et les évolutions.</div>
       </div>
-      <div class="faq-a">Appelez-nous au 03.53.63.03.32, écrivez-nous à Contact@alphakorner.fr ou venez nous voir au 15 Route de Hausbergen, 67300 Schiltigheim. Nous répondons sous 24h maximum.</div>
+
+      <div class="faq-item reveal">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">Comment vous contacter ?</span>
+          <span class="faq-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+        </div>
+        <div class="faq-a">Appelez-nous au 03.53.63.03.32, écrivez-nous à Contact@alphakorner.fr ou venez nous voir au 15 Route de Hausbergen, 67300 Schiltigheim. Nous répondons sous 24h maximum.</div>
+      </div>
     </div>
   </div>
 
   <!-- ─── Final CTA ─── -->
   <div class="final-cta reveal">
-    <p class="final-cta-title">Si vous lisez ceci, votre projet mérite d'exister.</p>
-    <p class="final-cta-sub">Un premier échange gratuit de 30 minutes pour comprendre vos besoins et vous proposer la meilleure approche.</p>
-    <a href="tel:+33353630332" class="final-cta-btn">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.38 2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.81a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-      Nous appeler maintenant
+    <p class="final-cta-title">Si vous lisez ceci,<br>C'est que votre projet mérite d'exister !</p>
+    <p class="final-cta-sub">Un premier échange gratuit de 30 minutes<br>pour comprendre vos besoins<br>et vous proposer la meilleure approche.</p>
+    <a href="mailto:Contact@alphakorner.fr" class="final-cta-btn">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      Démarrer maintenant
     </a>
   </div>
 
   <!-- ─── Footer ─── -->
   <footer class="footer">
-    <div class="footer-brand">Alpha<span>Korner</span></div>
+    <!-- Logo AK dans le footer -->
+    <a href="#" class="nav-logo-svg" style="justify-content:center">
+      <svg class="ak-logo-mark" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="19" cy="19" r="18" stroke="#1D1D1E" stroke-width="2.5"/>
+        <rect x="24" y="6" width="3.5" height="22" rx="1.75" fill="#34D16C"/>
+        <path d="M24 19C24 22.866 20.866 26 17 26C13.134 26 10 22.866 10 19C10 15.134 13.134 12 17 12C20.866 12 24 15.134 24 19Z" stroke="#1D1D1E" stroke-width="2.5"/>
+        <circle cx="17" cy="19" r="4" fill="white"/>
+      </svg>
+      <div class="ak-logo-wordmark">Alpha<span>Korner</span></div>
+    </a>
     <div class="footer-contact">
       <a href="tel:+33353630332">📞 03.53.63.03.32</a>
       <a href="mailto:Contact@alphakorner.fr">✉️ Contact@alphakorner.fr</a>
       <a href="https://maps.google.com/?q=15+Route+de+Hausbergen+67300+Schiltigheim" target="_blank">📍 15 Route de Hausbergen, 67300 Schiltigheim</a>
     </div>
     <div class="footer-links">
-      <a href="#features" onclick="document.getElementById('features').scrollIntoView({behavior:'smooth'});return false">Nos solutions</a>
-      <a href="#pricing" onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'});return false">Tarifs</a>
-      <a href="#contact" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'});return false">Contact</a>
+      <a href="#contact">Contact</a>
       <a href="https://alphaos67.github.io/Alpha-OS/" target="_blank">Site principal</a>
     </div>
+    <p class="footer-credit">Site créé avec ♥️ par Brice Jacotet</p>
     <p class="footer-copy">© 2026 Alpha Korner — Logiciels sur mesure à Strasbourg</p>
   </footer>
 
 </div><!-- end page-wrap -->
 
-<!-- ─── FAB ─── -->
-<a href="tel:+33353630332" class="fab" title="Nous appeler">
-  <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round">
-    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.38 2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.81a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+<!-- ─── FAB (Floating Action Button) ─── -->
+<div class="fab" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})" title="Nous contacter">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
   </svg>
-</a>
+</div>
 
 <script>
 // ─── Pill / Demo switcher ───
@@ -1248,7 +1347,7 @@ const observer = new IntersectionObserver((entries) => {
       observer.unobserve(e.target);
     }
   });
-}, { threshold: 0.12 });
+}, { threshold: 0.10 });
 revealEls.forEach(el => observer.observe(el));
 
 // ─── Stagger reveal for feat-cards ───
@@ -1256,7 +1355,7 @@ document.querySelectorAll('.feat-card').forEach((card, i) => {
   card.style.transitionDelay = (i * 0.08) + 's';
   card.style.opacity = '0';
   card.style.transform = 'translateY(16px)';
-  card.style.transition = 'opacity .5s ease, transform .5s ease';
+  card.style.transition = 'opacity .5s ease, transform .5s ease, box-shadow .2s, border-color .2s';
   const cardObserver = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (e.isIntersecting) {
@@ -1303,6 +1402,9 @@ if (statsSection) {
   }, { threshold: 0.3 });
   statsObserver.observe(statsSection);
 }
+
+// ─── Logo track: duplicate for seamless loop ───
+// Already duplicated in HTML; just ensure animation width is correct
 </script>
 </body>
 </html>
